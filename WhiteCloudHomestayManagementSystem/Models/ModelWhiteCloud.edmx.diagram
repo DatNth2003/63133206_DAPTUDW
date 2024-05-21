@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7a7cf210b31645a4b4f7b38ad3fb5da3" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Booking" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Customer" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Employee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Homestay" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.HomestayEmployee" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Service" Width="1.5" PointX="2.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Booking__Custome__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Booking__Homesta__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Customer__Homest__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__HomestayE__Emplo__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__HomestayE__Homes__44FF419A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Receptionist Dashboard";
+    Layout = "~/Areas/Receptionist/Views/Shared/_ReceptionistNavbar.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Quick Actions</h5>
+                        <a class="btn btn-primary mb-2" href="#">Check-in Guest</a>
+                        <a class="btn btn-primary mb-2" href="#">Check-out Guest</a>
+                        <a class="btn btn-primary mb-2" href="#">Create New Booking</a>
+                        <a class="btn btn-primary mb-2" href="#">Generate Invoice</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Recent Activities</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item">Activity 1</li>
+                            <li class="list-group-item">Activity 2</li>
+                            <li class="list-group-item">Activity 3</li>
+                            <li class="list-group-item">Activity 4</li>
+                            <li class="list-group-item">Activity 5</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
