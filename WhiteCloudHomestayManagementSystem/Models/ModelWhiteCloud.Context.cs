@@ -29,7 +29,7 @@ namespace WhiteCloudHomestayManagementSystem.Models
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Homestay> Homestays { get; set; }
-        public virtual DbSet<HomestayEmployee> HomestayEmployees { get; set; }
         public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<Invoice> Invoices { get; set; }
     }
 }

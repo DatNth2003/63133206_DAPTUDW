@@ -26,6 +26,7 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="20" />
           <Property Name="IdCardImg" Type="nvarchar" MaxLength="100" />
           <Property Name="HomestayID" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -38,6 +39,7 @@
           <Property Name="Position" Type="nvarchar" MaxLength="100" />
           <Property Name="Salary" Type="varchar" MaxLength="20" />
           <Property Name="IdCardImg" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Homestay">
           <Key>
@@ -50,13 +52,15 @@
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="HomestayEmployee">
+        <EntityType Name="Invoice">
           <Key>
-            <PropertyRef Name="HomestayEmployeeID" />
+            <PropertyRef Name="InvoiceID" />
           </Key>
-          <Property Name="HomestayEmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmployeeID" Type="int" />
-          <Property Name="HomestayID" Type="int" />
+          <Property Name="InvoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingID" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IssuedDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -103,27 +107,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HomestayE__Emplo__440B1D61">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-          <End Role="HomestayEmployee" Type="Self.HomestayEmployee" Multiplicity="*" />
+        <Association Name="FK__Invoice__Booking__49C3F6B7">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeID" />
+            <Principal Role="Booking">
+              <PropertyRef Name="BookingID" />
             </Principal>
-            <Dependent Role="HomestayEmployee">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__HomestayE__Homes__44FF419A">
-          <End Role="Homestay" Type="Self.Homestay" Multiplicity="0..1" />
-          <End Role="HomestayEmployee" Type="Self.HomestayEmployee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Homestay">
-              <PropertyRef Name="HomestayID" />
-            </Principal>
-            <Dependent Role="HomestayEmployee">
-              <PropertyRef Name="HomestayID" />
+            <Dependent Role="Invoice">
+              <PropertyRef Name="BookingID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -132,7 +124,7 @@
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Homestay" EntityType="Self.Homestay" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="HomestayEmployee" EntityType="Self.HomestayEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Booking__Custome__3D5E1FD2" Association="Self.FK__Booking__Custome__3D5E1FD2">
             <End Role="Customer" EntitySet="Customer" />
@@ -146,13 +138,9 @@
             <End Role="Homestay" EntitySet="Homestay" />
             <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
-          <AssociationSet Name="FK__HomestayE__Emplo__440B1D61" Association="Self.FK__HomestayE__Emplo__440B1D61">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="HomestayEmployee" EntitySet="HomestayEmployee" />
-          </AssociationSet>
-          <AssociationSet Name="FK__HomestayE__Homes__44FF419A" Association="Self.FK__HomestayE__Homes__44FF419A">
-            <End Role="Homestay" EntitySet="Homestay" />
-            <End Role="HomestayEmployee" EntitySet="HomestayEmployee" />
+          <AssociationSet Name="FK__Invoice__Booking__49C3F6B7" Association="Self.FK__Invoice__Booking__49C3F6B7">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="Invoice" EntitySet="Invoice" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -172,6 +160,7 @@
           <Property Name="Paid" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.FK__Booking__Custome__3D5E1FD2" FromRole="Booking" ToRole="Customer" />
           <NavigationProperty Name="Homestay" Relationship="Self.FK__Booking__Homesta__3C69FB99" FromRole="Booking" ToRole="Homestay" />
+          <NavigationProperty Name="Invoices" Relationship="DBWhiteCloudModel.FK__Invoice__Booking__49C3F6B7" FromRole="Booking" ToRole="Invoice" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -184,6 +173,7 @@
           <Property Name="HomestayID" Type="Int32" />
           <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__Custome__3D5E1FD2" FromRole="Customer" ToRole="Booking" />
           <NavigationProperty Name="Homestay" Relationship="Self.FK__Customer__Homest__398D8EEE" FromRole="Customer" ToRole="Homestay" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -196,7 +186,7 @@
           <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Salary" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdCardImg" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="HomestayEmployees" Relationship="Self.FK__HomestayE__Emplo__440B1D61" FromRole="Employee" ToRole="HomestayEmployee" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Homestay">
           <Key>
@@ -210,17 +200,6 @@
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__Homesta__3C69FB99" FromRole="Homestay" ToRole="Booking" />
           <NavigationProperty Name="Customers" Relationship="Self.FK__Customer__Homest__398D8EEE" FromRole="Homestay" ToRole="Customer" />
-          <NavigationProperty Name="HomestayEmployees" Relationship="Self.FK__HomestayE__Homes__44FF419A" FromRole="Homestay" ToRole="HomestayEmployee" />
-        </EntityType>
-        <EntityType Name="HomestayEmployee">
-          <Key>
-            <PropertyRef Name="HomestayEmployeeID" />
-          </Key>
-          <Property Name="HomestayEmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeID" Type="Int32" />
-          <Property Name="HomestayID" Type="Int32" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK__HomestayE__Emplo__440B1D61" FromRole="HomestayEmployee" ToRole="Employee" />
-          <NavigationProperty Name="Homestay" Relationship="Self.FK__HomestayE__Homes__44FF419A" FromRole="HomestayEmployee" ToRole="Homestay" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -267,36 +246,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HomestayE__Emplo__440B1D61">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-          <End Role="HomestayEmployee" Type="Self.HomestayEmployee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="HomestayEmployee">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__HomestayE__Homes__44FF419A">
-          <End Role="Homestay" Type="Self.Homestay" Multiplicity="0..1" />
-          <End Role="HomestayEmployee" Type="Self.HomestayEmployee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Homestay">
-              <PropertyRef Name="HomestayID" />
-            </Principal>
-            <Dependent Role="HomestayEmployee">
-              <PropertyRef Name="HomestayID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DBWhiteCloudEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bookings" EntityType="Self.Booking" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="Homestays" EntityType="Self.Homestay" />
-          <EntitySet Name="HomestayEmployees" EntityType="Self.HomestayEmployee" />
           <EntitySet Name="Services" EntityType="Self.Service" />
           <AssociationSet Name="FK__Booking__Custome__3D5E1FD2" Association="Self.FK__Booking__Custome__3D5E1FD2">
             <End Role="Customer" EntitySet="Customers" />
@@ -310,15 +264,35 @@
             <End Role="Homestay" EntitySet="Homestays" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
-          <AssociationSet Name="FK__HomestayE__Emplo__440B1D61" Association="Self.FK__HomestayE__Emplo__440B1D61">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="HomestayEmployee" EntitySet="HomestayEmployees" />
-          </AssociationSet>
-          <AssociationSet Name="FK__HomestayE__Homes__44FF419A" Association="Self.FK__HomestayE__Homes__44FF419A">
-            <End Role="Homestay" EntitySet="Homestays" />
-            <End Role="HomestayEmployee" EntitySet="HomestayEmployees" />
+          <EntitySet Name="Invoices" EntityType="DBWhiteCloudModel.Invoice" />
+          <AssociationSet Name="FK__Invoice__Booking__49C3F6B7" Association="DBWhiteCloudModel.FK__Invoice__Booking__49C3F6B7">
+            <End Role="Booking" EntitySet="Bookings" />
+            <End Role="Invoice" EntitySet="Invoices" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="InvoiceID" />
+          </Key>
+          <Property Name="InvoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IssuedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Booking" Relationship="DBWhiteCloudModel.FK__Invoice__Booking__49C3F6B7" FromRole="Invoice" ToRole="Booking" />
+        </EntityType>
+        <Association Name="FK__Invoice__Booking__49C3F6B7">
+          <End Type="DBWhiteCloudModel.Booking" Role="Booking" Multiplicity="0..1" />
+          <End Type="DBWhiteCloudModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="BookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -341,6 +315,7 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="DBWhiteCloudModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
@@ -352,6 +327,7 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="DBWhiteCloudModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
@@ -374,15 +350,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HomestayEmployees">
-            <EntityTypeMapping TypeName="DBWhiteCloudModel.HomestayEmployee">
-              <MappingFragment StoreEntitySet="HomestayEmployee">
-                <ScalarProperty Name="HomestayEmployeeID" ColumnName="HomestayEmployeeID" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="HomestayID" ColumnName="HomestayID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Services">
             <EntityTypeMapping TypeName="DBWhiteCloudModel.Service">
               <MappingFragment StoreEntitySet="Service">
@@ -390,6 +357,17 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="DBWhiteCloudModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

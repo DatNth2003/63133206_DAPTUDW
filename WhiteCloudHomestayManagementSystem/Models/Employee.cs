@@ -14,12 +14,6 @@ namespace WhiteCloudHomestayManagementSystem.Models
     
     public partial class Employee
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
-        {
-            this.HomestayEmployees = new HashSet<HomestayEmployee>();
-        }
-    
         public int EmployeeID { get; set; }
         public string FullName { get; set; }
         public string Phone { get; set; }
@@ -27,8 +21,6 @@ namespace WhiteCloudHomestayManagementSystem.Models
         public string Position { get; set; }
         public string Salary { get; set; }
         public string IdCardImg { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HomestayEmployee> HomestayEmployees { get; set; }
+        public string Email { get; set; }
     }
 }

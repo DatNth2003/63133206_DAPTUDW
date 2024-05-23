@@ -1,0 +1,71 @@
+﻿body {
+    padding: 0;
+    margin: 0;
+}
+
+.pagination-container .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.pagination-container .pagination li.page-item a.page-link {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    margin: 0 5px;
+    background-color: #f8f9fa;
+    color: #007bff;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-container .pagination li.page-item a.page-link:hover {
+    background-color: #e9ecef;
+}
+
+.pagination-container .pagination li.page-item.active a.page-link {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination-container .pagination li.page-item.disabled a.page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+.pagination-container .pagination li.page-item button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    margin: 0 5px;
+    background-color: #f8f9fa;
+    color: #007bff;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-container .pagination li.page-item button:hover {
+    background-color: #e9ecef;
+}
+
+.pagination-container .pagination li.page-item button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.pagination-container .pagination li.page-item button:disabled {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}

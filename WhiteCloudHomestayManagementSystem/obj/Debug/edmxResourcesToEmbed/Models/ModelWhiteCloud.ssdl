@@ -21,6 +21,7 @@
     <Property Name="Phone" Type="nvarchar" MaxLength="20" />
     <Property Name="IdCardImg" Type="nvarchar" MaxLength="100" />
     <Property Name="HomestayID" Type="int" />
+    <Property Name="Email" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
@@ -33,6 +34,7 @@
     <Property Name="Position" Type="nvarchar" MaxLength="100" />
     <Property Name="Salary" Type="varchar" MaxLength="20" />
     <Property Name="IdCardImg" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="Homestay">
     <Key>
@@ -45,13 +47,15 @@
     <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Status" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="HomestayEmployee">
+  <EntityType Name="Invoice">
     <Key>
-      <PropertyRef Name="HomestayEmployeeID" />
+      <PropertyRef Name="InvoiceID" />
     </Key>
-    <Property Name="HomestayEmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="EmployeeID" Type="int" />
-    <Property Name="HomestayID" Type="int" />
+    <Property Name="InvoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingID" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IssuedDate" Type="date" Nullable="false" />
   </EntityType>
   <EntityType Name="Service">
     <Key>
@@ -98,27 +102,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__HomestayE__Emplo__440B1D61">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-    <End Role="HomestayEmployee" Type="Self.HomestayEmployee" Multiplicity="*" />
+  <Association Name="FK__Invoice__Booking__49C3F6B7">
+    <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="EmployeeID" />
+      <Principal Role="Booking">
+        <PropertyRef Name="BookingID" />
       </Principal>
-      <Dependent Role="HomestayEmployee">
-        <PropertyRef Name="EmployeeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__HomestayE__Homes__44FF419A">
-    <End Role="Homestay" Type="Self.Homestay" Multiplicity="0..1" />
-    <End Role="HomestayEmployee" Type="Self.HomestayEmployee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Homestay">
-        <PropertyRef Name="HomestayID" />
-      </Principal>
-      <Dependent Role="HomestayEmployee">
-        <PropertyRef Name="HomestayID" />
+      <Dependent Role="Invoice">
+        <PropertyRef Name="BookingID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -127,7 +119,7 @@
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Homestay" EntityType="Self.Homestay" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="HomestayEmployee" EntityType="Self.HomestayEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Booking__Custome__3D5E1FD2" Association="Self.FK__Booking__Custome__3D5E1FD2">
       <End Role="Customer" EntitySet="Customer" />
@@ -141,13 +133,9 @@
       <End Role="Homestay" EntitySet="Homestay" />
       <End Role="Customer" EntitySet="Customer" />
     </AssociationSet>
-    <AssociationSet Name="FK__HomestayE__Emplo__440B1D61" Association="Self.FK__HomestayE__Emplo__440B1D61">
-      <End Role="Employee" EntitySet="Employee" />
-      <End Role="HomestayEmployee" EntitySet="HomestayEmployee" />
-    </AssociationSet>
-    <AssociationSet Name="FK__HomestayE__Homes__44FF419A" Association="Self.FK__HomestayE__Homes__44FF419A">
-      <End Role="Homestay" EntitySet="Homestay" />
-      <End Role="HomestayEmployee" EntitySet="HomestayEmployee" />
+    <AssociationSet Name="FK__Invoice__Booking__49C3F6B7" Association="Self.FK__Invoice__Booking__49C3F6B7">
+      <End Role="Booking" EntitySet="Booking" />
+      <End Role="Invoice" EntitySet="Invoice" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

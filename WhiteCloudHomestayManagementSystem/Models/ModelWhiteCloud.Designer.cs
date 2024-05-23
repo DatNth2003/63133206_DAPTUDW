@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\WhiteCloudHomestayManagementSystem\Models\ModelWhiteCloud.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\Models\ModelWhiteCloud.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

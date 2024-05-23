@@ -1,5 +1,4 @@
-﻿using PagedList;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -7,123 +6,120 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using PagedList;
-
 using WhiteCloudHomestayManagementSystem.Models;
 
-namespace WhiteCloudHomestayManagementSystem.Areas.Admin.Controllers
+namespace WhiteCloudHomestayManagementSystem.Areas.Manager
 {
-    public class HomestaysController : Controller
+    public class BookingsController : Controller
     {
         private DBWhiteCloudEntities db = new DBWhiteCloudEntities();
 
-        // GET: Admin/Homestays
-        public ActionResult Index(string searchString, int? page)
+        // GET: Manager/Bookings
+        public ActionResult Index()
         {
-            var homestays = db.Homestays.ToList();
-
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                homestays = homestays.Where(h => h.Name.Contains(searchString)).ToList();
-            }
-
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            var pagedHomestays = homestays.ToPagedList(pageNumber, pageSize);
-            return View(pagedHomestays);
+            var bookings = db.Bookings.Include(b => b.Customer).Include(b => b.Homestay);
+            return View(bookings.ToList());
         }
 
-        // GET: Admin/Homestays/Details/5
+        // GET: Manager/Bookings/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Homestay homestay = db.Homestays.Find(id);
-            if (homestay == null)
+            Booking booking = db.Bookings.Find(id);
+            if (booking == null)
             {
                 return HttpNotFound();
             }
-            return View(homestay);
+            return View(booking);
         }
 
-        // GET: Admin/Homestays/Create
+        // GET: Manager/Bookings/Create
         public ActionResult Create()
         {
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FullName");
+            ViewBag.HomestayID = new SelectList(db.Homestays, "HomestayID", "Name");
             return View();
         }
 
-        // POST: Admin/Homestays/Create
+        // POST: Manager/Bookings/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "HomestayID,Name,Address,Description,Price,Status")] Homestay homestay)
+        public ActionResult Create([Bind(Include = "BookingID,HomestayID,CustomerID,CheckInDate,CheckOutDate,Status,Paid")] Booking booking)
         {
             if (ModelState.IsValid)
             {
-                db.Homestays.Add(homestay);
+                db.Bookings.Add(booking);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(homestay);
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FullName", booking.CustomerID);
+            ViewBag.HomestayID = new SelectList(db.Homestays, "HomestayID", "Name", booking.HomestayID);
+            return View(booking);
         }
 
-        // GET: Admin/Homestays/Edit/5
+        // GET: Manager/Bookings/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Homestay homestay = db.Homestays.Find(id);
-            if (homestay == null)
+            Booking booking = db.Bookings.Find(id);
+            if (booking == null)
             {
                 return HttpNotFound();
             }
-            return View(homestay);
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FullName", booking.CustomerID);
+            ViewBag.HomestayID = new SelectList(db.Homestays, "HomestayID", "Name", booking.HomestayID);
+            return View(booking);
         }
 
-        // POST: Admin/Homestays/Edit/5
+        // POST: Manager/Bookings/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "HomestayID,Name,Address,Description,Price,Status")] Homestay homestay)
+        public ActionResult Edit([Bind(Include = "BookingID,HomestayID,CustomerID,CheckInDate,CheckOutDate,Status,Paid")] Booking booking)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(homestay).State = EntityState.Modified;
+                db.Entry(booking).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(homestay);
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FullName", booking.CustomerID);
+            ViewBag.HomestayID = new SelectList(db.Homestays, "HomestayID", "Name", booking.HomestayID);
+            return View(booking);
         }
 
-        // GET: Admin/Homestays/Delete/5
+        // GET: Manager/Bookings/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Homestay homestay = db.Homestays.Find(id);
-            if (homestay == null)
+            Booking booking = db.Bookings.Find(id);
+            if (booking == null)
             {
                 return HttpNotFound();
             }
-            return View(homestay);
+            return View(booking);
         }
 
-        // POST: Admin/Homestays/Delete/5
+        // POST: Manager/Bookings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Homestay homestay = db.Homestays.Find(id);
-            db.Homestays.Remove(homestay);
+            Booking booking = db.Bookings.Find(id);
+            db.Bookings.Remove(booking);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,0 +1,21 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    padding:0;
+    margin:0;
+    text-decoration:none;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.card {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}

@@ -12,13 +12,14 @@ namespace WhiteCloudHomestayManagementSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HomestayEmployee
+    public partial class Invoice
     {
-        public int HomestayEmployeeID { get; set; }
-        public Nullable<int> EmployeeID { get; set; }
-        public Nullable<int> HomestayID { get; set; }
+        public int InvoiceID { get; set; }
+        public Nullable<int> BookingID { get; set; }
+        public Nullable<decimal> Amount { get; set; }
+        public string Status { get; set; }
+        public System.DateTime IssuedDate { get; set; }
     
-        public virtual Employee Employee { get; set; }
-        public virtual Homestay Homestay { get; set; }
+        public virtual Booking Booking { get; set; }
     }
 }

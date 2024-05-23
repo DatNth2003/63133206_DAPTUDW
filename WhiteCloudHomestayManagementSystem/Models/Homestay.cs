@@ -19,7 +19,6 @@ namespace WhiteCloudHomestayManagementSystem.Models
         {
             this.Bookings = new HashSet<Booking>();
             this.Customers = new HashSet<Customer>();
-            this.HomestayEmployees = new HashSet<HomestayEmployee>();
         }
     
         public int HomestayID { get; set; }
@@ -33,7 +32,5 @@ namespace WhiteCloudHomestayManagementSystem.Models
         public virtual ICollection<Booking> Bookings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HomestayEmployee> HomestayEmployees { get; set; }
     }
 }

@@ -14,6 +14,12 @@ namespace WhiteCloudHomestayManagementSystem.Models
     
     public partial class Booking
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Booking()
+        {
+            this.Invoices = new HashSet<Invoice>();
+        }
+    
         public int BookingID { get; set; }
         public Nullable<int> HomestayID { get; set; }
         public Nullable<int> CustomerID { get; set; }
@@ -24,5 +30,7 @@ namespace WhiteCloudHomestayManagementSystem.Models
     
         public virtual Customer Customer { get; set; }
         public virtual Homestay Homestay { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

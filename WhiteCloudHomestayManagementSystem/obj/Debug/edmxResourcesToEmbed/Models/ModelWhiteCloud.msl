@@ -17,6 +17,7 @@
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="DBWhiteCloudModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
@@ -28,6 +29,7 @@
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="DBWhiteCloudModel.Employee">
         <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
@@ -50,15 +52,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="HomestayEmployees">
-      <EntityTypeMapping TypeName="DBWhiteCloudModel.HomestayEmployee">
-        <MappingFragment StoreEntitySet="HomestayEmployee">
-          <ScalarProperty Name="HomestayEmployeeID" ColumnName="HomestayEmployeeID" />
-          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-          <ScalarProperty Name="HomestayID" ColumnName="HomestayID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Services">
       <EntityTypeMapping TypeName="DBWhiteCloudModel.Service">
         <MappingFragment StoreEntitySet="Service">
@@ -66,6 +59,17 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Invoices">
+      <EntityTypeMapping TypeName="DBWhiteCloudModel.Invoice">
+        <MappingFragment StoreEntitySet="Invoice">
+          <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
