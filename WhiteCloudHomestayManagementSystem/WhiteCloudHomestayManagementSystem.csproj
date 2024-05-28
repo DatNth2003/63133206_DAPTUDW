@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net, Version=0.1.4141.31969, Culture=neutral, PublicKeyToken=f3bc8f8c31beeb49, processorArchitecture=MSIL">
+      <HintPath>packages\BCrypt.Net.0.1.0\lib\net35\BCrypt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -80,6 +83,24 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -97,32 +118,8 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -193,11 +190,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Manager\BookingsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EmployeesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Manager\Controllers\HomestaysController.cs" />
+    <Compile Include="Areas\Manager\Controllers\ReservationsController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
-    <Compile Include="Areas\Receptionist\Controllers\ReceptionistBookingController.cs" />
-    <Compile Include="Areas\Receptionist\Controllers\ReceptionistController.cs" />
+    <Compile Include="Areas\Receptionist\Controllers\CheckInController.cs" />
+    <Compile Include="Areas\Receptionist\Controllers\CustomersController.cs" />
+    <Compile Include="Areas\Receptionist\Controllers\ReceptionistsController.cs" />
+    <Compile Include="Areas\Receptionist\Controllers\ReservationsController.cs" />
     <Compile Include="Areas\Receptionist\ReceptionistAreaRegistration.cs" />
+    <Compile Include="Areas\Staff\Controllers\HomestaysController.cs" />
+    <Compile Include="Areas\Staff\StaffAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -205,9 +209,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Booking.cs">
-      <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
     </Compile>
@@ -217,8 +218,17 @@
     <Compile Include="Models\Homestay.cs">
       <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HomestayStatus.cs">
+      <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Image.cs">
+      <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Invoice.cs">
+      <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InvoiceStatus.cs">
       <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
@@ -237,7 +247,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelWhiteCloud.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Payment.cs">
+      <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PaymentType.cs">
+      <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Reservation.cs">
+      <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReservationStatus.cs">
+      <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Service.cs">
+      <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserClaim.cs">
+      <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserLogin.cs">
       <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -261,6 +295,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\Admin\admin-navbar.css" />
     <Content Include="Content\css\pagination.css" />
     <Content Include="Content\css\Receptionist\style.css" />
     <Content Include="Content\PagedList.css" />
@@ -285,7 +320,14 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Receptionist\Views\web.config" />
+    <Content Include="Areas\Receptionist\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Shared\_ReceptionistNavbar.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Receptionists\Index.cshtml" />
+    <Content Include="Areas\Manager\Views\web.config" />
+    <Content Include="Areas\Manager\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Manager\Views\Shared\_Layout.cshtml" />
     <EntityDeploy Include="Models\ModelWhiteCloud.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelWhiteCloud.Designer.cs</LastGenOutput>
@@ -293,22 +335,41 @@
     <Content Include="Models\ModelWhiteCloud.edmx.diagram">
       <DependentUpon>ModelWhiteCloud.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Receptionist\Views\web.config" />
+    <Content Include="Areas\Staff\Views\web.config" />
+    <Content Include="Areas\Staff\Views\Homestays\Index.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Reservations\Create.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Reservations\Delete.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Reservations\Details.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Reservations\Edit.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Reservations\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Employees\Index.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Customers\Create.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Customers\Delete.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Customers\Details.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Customers\Edit.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Customers\Index.cshtml" />
+    <Content Include="Areas\Receptionist\Views\CheckIn\Create.cshtml" />
+    <Content Include="Areas\Manager\Views\Reservations\Create.cshtml" />
+    <Content Include="Areas\Manager\Views\Reservations\Delete.cshtml" />
+    <Content Include="Areas\Manager\Views\Reservations\Details.cshtml" />
+    <Content Include="Areas\Manager\Views\Reservations\Edit.cshtml" />
+    <Content Include="Areas\Manager\Views\Reservations\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AdminNavbar.cshtml" />
-    <Content Include="Areas\Receptionist\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Receptionist\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Receptionist\Views\Shared\_ReceptionistNavbar.cshtml" />
-    <Content Include="Areas\Receptionist\Views\ReceptionistBooking\Index.cshtml" />
-    <Content Include="Areas\Receptionist\Views\Receptionist\Index.cshtml" />
-    <Content Include="Areas\Receptionist\Views\ReceptionistBooking\CheckIn.cshtml" />
-    <Content Include="Areas\Manager\Views\web.config" />
-    <Content Include="Areas\Manager\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Manager\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Manager\Views\Bookings\Create.cshtml" />
-    <Content Include="Areas\Manager\Views\Bookings\Delete.cshtml" />
-    <Content Include="Areas\Manager\Views\Bookings\Details.cshtml" />
-    <Content Include="Areas\Manager\Views\Bookings\Edit.cshtml" />
-    <Content Include="Areas\Manager\Views\Bookings\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Manager\Views\Homestays\Create.cshtml" />
+    <Content Include="Areas\Manager\Views\Homestays\Delete.cshtml" />
+    <Content Include="Areas\Manager\Views\Homestays\Details.cshtml" />
+    <Content Include="Areas\Manager\Views\Homestays\Edit.cshtml" />
+    <Content Include="Areas\Manager\Views\Homestays\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -354,15 +415,18 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\UserAccount\Login.cshtml" />
+    <Content Include="Views\Services\Details.cshtml" />
+    <Content Include="Views\Services\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="App_Data\Images\Customers\IdCards\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Manager\Controllers\" />
     <Folder Include="Areas\Manager\Data\" />
     <Folder Include="Areas\Receptionist\Data\" />
-    <Folder Include="Views\Employee\" />
+    <Folder Include="Areas\Staff\Data\" />
+    <Folder Include="Areas\Staff\Views\Shared\" />
+    <Folder Include="Views\Auth\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

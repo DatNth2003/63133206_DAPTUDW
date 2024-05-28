@@ -17,18 +17,21 @@ namespace WhiteCloudHomestayManagementSystem.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.Bookings = new HashSet<Booking>();
+            this.Reservations = new HashSet<Reservation>();
         }
     
-        public int CustomerID { get; set; }
+        public System.Guid CustomerId { get; set; }
+        public string UserId { get; set; }
         public string FullName { get; set; }
+        public string Email { get; set; }
         public string Phone { get; set; }
         public string IdCardImg { get; set; }
-        public Nullable<int> HomestayID { get; set; }
-        public string Email { get; set; }
+        public string IdCardNum { get; set; }
+        public Nullable<System.Guid> HomestayId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Booking> Bookings { get; set; }
         public virtual Homestay Homestay { get; set; }
+        public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

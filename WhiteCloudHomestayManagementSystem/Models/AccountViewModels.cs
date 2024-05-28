@@ -60,6 +60,7 @@ namespace WhiteCloudHomestayManagementSystem.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
     }
 
     public class RegisterViewModel
@@ -108,5 +109,46 @@ namespace WhiteCloudHomestayManagementSystem.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+    public class EmployeeViewModel
+    {
+        [Required(ErrorMessage = "Full Name is required")]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
+        [Required(ErrorMessage = "Phone number is required")]
+        [Display(Name = "Phone")]
+        public string Phone { get; set; }
+
+        [Required(ErrorMessage = "Address is required")]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        [Required(ErrorMessage = "Position is required")]
+        [Display(Name = "Position")]
+        public string Position { get; set; }
+
+        [Required(ErrorMessage = "Salary is required")]
+        [Display(Name = "Salary")]
+        public string Salary { get; set; }
+
+        [Required(ErrorMessage = "ID Card Image is required")]
+        [Display(Name = "ID Card Image")]
+        public string IdCardImg { get; set; }
+
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Password is required")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm Password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
     }
 }

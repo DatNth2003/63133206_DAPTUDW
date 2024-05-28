@@ -173,6 +173,7 @@ D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\roslyn\vbc.rsp
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\roslyn\VBCSCompiler.exe
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\roslyn\VBCSCompiler.exe.config
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\Antlr3.Runtime.dll
+D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\BCrypt.Net.dll
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\EntityFramework.dll
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\EntityFramework.SqlServer.dll
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\Microsoft.AspNet.Identity.Core.dll
@@ -206,6 +207,7 @@ D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Web.Web
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Web.WebPages.dll
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Web.WebPages.Razor.dll
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\WebGrease.dll
+D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\BCrypt.Net.xml
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\PagedList.xml
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\PagedList.Mvc.xml
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Buffers.xml
@@ -215,11 +217,11 @@ D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Runtime
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Text.Encodings.Web.xml
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Web.Helpers.xml
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Web.Mvc.xml
-D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Web.Optimization.xml
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Web.Razor.xml
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Web.WebPages.xml
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Web.WebPages.Deployment.xml
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Web.WebPages.Razor.xml
+D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\System.Web.Optimization.xml
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\Newtonsoft.Json.xml
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\Antlr3.Runtime.pdb
 D:\GitHub\63133206_DAPTUDW\WhiteCloudHomestayManagementSystem\bin\EntityFramework.xml

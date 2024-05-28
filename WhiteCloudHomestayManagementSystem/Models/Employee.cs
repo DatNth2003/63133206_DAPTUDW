@@ -14,13 +14,23 @@ namespace WhiteCloudHomestayManagementSystem.Models
     
     public partial class Employee
     {
-        public int EmployeeID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employee()
+        {
+            this.Reservations = new HashSet<Reservation>();
+        }
+    
+        public System.Guid EmployeeId { get; set; }
+        public string UserId { get; set; }
         public string FullName { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
         public string Position { get; set; }
         public string Salary { get; set; }
         public string IdCardImg { get; set; }
-        public string Email { get; set; }
+    
+        public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

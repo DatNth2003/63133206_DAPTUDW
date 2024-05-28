@@ -14,12 +14,17 @@ namespace WhiteCloudHomestayManagementSystem.Models
     
     public partial class Invoice
     {
-        public int InvoiceID { get; set; }
-        public Nullable<int> BookingID { get; set; }
-        public Nullable<decimal> Amount { get; set; }
-        public string Status { get; set; }
+        public int InvoiceId { get; set; }
+        public Nullable<System.Guid> ReservationId { get; set; }
+        public Nullable<int> StatusId { get; set; }
         public System.DateTime IssuedDate { get; set; }
+        public Nullable<System.DateTime> CheckOutDate { get; set; }
+        public decimal HomestayCharge { get; set; }
+        public Nullable<decimal> ServiceCharge { get; set; }
+        public Nullable<decimal> Surcharge { get; set; }
+        public decimal TotalAmount { get; set; }
     
-        public virtual Booking Booking { get; set; }
+        public virtual Reservation Reservation { get; set; }
+        public virtual InvoiceStatus InvoiceStatus { get; set; }
     }
 }

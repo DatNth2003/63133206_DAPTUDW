@@ -1,141 +1,480 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DBWhiteCloudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Booking">
+  <EntityType Name="Customers">
     <Key>
-      <PropertyRef Name="BookingID" />
+      <PropertyRef Name="CustomerId" />
     </Key>
-    <Property Name="BookingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="HomestayID" Type="int" />
-    <Property Name="CustomerID" Type="int" />
-    <Property Name="CheckInDate" Type="date" Nullable="false" />
-    <Property Name="CheckOutDate" Type="date" Nullable="false" />
-    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Paid" Type="bit" Nullable="false" />
+    <Property Name="CustomerId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IdCardImg" Type="nvarchar" MaxLength="255" />
+    <Property Name="IdCardNum" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="HomestayId" Type="uniqueidentifier" />
   </EntityType>
-  <EntityType Name="Customer">
+  <EntityType Name="Employees">
     <Key>
-      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="EmployeeId" />
     </Key>
-    <Property Name="CustomerID" Type="int" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="100" />
-    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
-    <Property Name="IdCardImg" Type="nvarchar" MaxLength="100" />
-    <Property Name="HomestayID" Type="int" />
-    <Property Name="Email" Type="nvarchar" MaxLength="255" />
-  </EntityType>
-  <EntityType Name="Employee">
-    <Key>
-      <PropertyRef Name="EmployeeID" />
-    </Key>
-    <Property Name="EmployeeID" Type="int" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="100" />
-    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
-    <Property Name="Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="EmployeeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Position" Type="nvarchar" MaxLength="100" />
-    <Property Name="Salary" Type="varchar" MaxLength="20" />
-    <Property Name="IdCardImg" Type="nvarchar" MaxLength="100" />
-    <Property Name="Email" Type="nvarchar" MaxLength="255" />
+    <Property Name="Salary" Type="nvarchar" MaxLength="20" />
+    <Property Name="IdCardImg" Type="nvarchar" MaxLength="255" />
   </EntityType>
-  <EntityType Name="Homestay">
+  <EntityType Name="Homestays">
     <Key>
-      <PropertyRef Name="HomestayID" />
+      <PropertyRef Name="HomestayId" />
     </Key>
-    <Property Name="HomestayID" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="100" />
-    <Property Name="Address" Type="nvarchar" MaxLength="255" />
+    <Property Name="HomestayId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" />
-    <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="ContactPhone" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ContactEmail" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Capacity" Type="int" Nullable="false" />
+    <Property Name="StatusId" Type="int" />
   </EntityType>
-  <EntityType Name="Invoice">
+  <EntityType Name="HomestayStatuses">
     <Key>
-      <PropertyRef Name="InvoiceID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="InvoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="BookingID" Type="int" />
-    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="ImageId" />
+    </Key>
+    <Property Name="ImageId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HomestayId" Type="uniqueidentifier" />
+    <Property Name="ImageUrl" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Invoices">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReservationId" Type="uniqueidentifier" />
+    <Property Name="StatusId" Type="int" />
+    <Property Name="IssuedDate" Type="date" Nullable="false" />
+    <Property Name="CheckOutDate" Type="date" />
+    <Property Name="HomestayCharge" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="ServiceCharge" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Surcharge" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InvoiceStatuses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentId" />
+    </Key>
+    <Property Name="PaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReservationId" Type="uniqueidentifier" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IssuedDate" Type="date" Nullable="false" />
+    <Property Name="PaymentTypeId" Type="int" />
   </EntityType>
-  <EntityType Name="Service">
+  <EntityType Name="PaymentTypes">
     <Key>
-      <PropertyRef Name="ServiceID" />
+      <PropertyRef Name="PaymentTypeId" />
     </Key>
-    <Property Name="ServiceID" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="100" />
-    <Property Name="Description" Type="nvarchar(max)" />
-    <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PaymentTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
-  <Association Name="FK__Booking__Custome__3D5E1FD2">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+  <EntityType Name="Reservations">
+    <Key>
+      <PropertyRef Name="ReservationId" />
+    </Key>
+    <Property Name="ReservationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CustomerId" Type="uniqueidentifier" />
+    <Property Name="HomestayId" Type="uniqueidentifier" />
+    <Property Name="EmployeeId" Type="uniqueidentifier" />
+    <Property Name="CheckInDate" Type="date" Nullable="false" />
+    <Property Name="CheckOutDate" Type="date" Nullable="false" />
+    <Property Name="StatusId" Type="int" />
+    <Property Name="NumOfAdults" Type="int" Nullable="false" />
+    <Property Name="NumOfChild" Type="int" />
+    <Property Name="SpecialRequests" Type="nvarchar" MaxLength="500" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="ReservationStatuses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Services">
+    <Key>
+      <PropertyRef Name="ServiceId" />
+    </Key>
+    <Property Name="ServiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="UserLogins">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEnd" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK__Customers__Homes__5BE2A6F2">
+    <End Role="Homestays" Type="Self.Homestays" Multiplicity="0..1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="CustomerID" />
+      <Principal Role="Homestays">
+        <PropertyRef Name="HomestayId" />
       </Principal>
-      <Dependent Role="Booking">
-        <PropertyRef Name="CustomerID" />
+      <Dependent Role="Customers">
+        <PropertyRef Name="HomestayId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Booking__Homesta__3C69FB99">
-    <End Role="Homestay" Type="Self.Homestay" Multiplicity="0..1" />
-    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+  <Association Name="FK__Customers__UserI__5AEE82B9">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Homestay">
-        <PropertyRef Name="HomestayID" />
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Booking">
-        <PropertyRef Name="HomestayID" />
+      <Dependent Role="Customers">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Customer__Homest__398D8EEE">
-    <End Role="Homestay" Type="Self.Homestay" Multiplicity="0..1" />
-    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+  <Association Name="FK__Employees__UserI__571DF1D5">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Homestay">
-        <PropertyRef Name="HomestayID" />
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Customer">
-        <PropertyRef Name="HomestayID" />
+      <Dependent Role="Employees">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Invoice__Booking__49C3F6B7">
-    <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
-    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+  <Association Name="FK__Homestays__Statu__47DBAE45">
+    <End Role="HomestayStatuses" Type="Self.HomestayStatuses" Multiplicity="0..1" />
+    <End Role="Homestays" Type="Self.Homestays" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Booking">
-        <PropertyRef Name="BookingID" />
+      <Principal Role="HomestayStatuses">
+        <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Invoice">
-        <PropertyRef Name="BookingID" />
+      <Dependent Role="Homestays">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Images__Homestay__4BAC3F29">
+    <End Role="Homestays" Type="Self.Homestays" Multiplicity="0..1" />
+    <End Role="Images" Type="Self.Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Homestays">
+        <PropertyRef Name="HomestayId" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="HomestayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Invoices__Reserv__72C60C4A">
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="0..1" />
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservations">
+        <PropertyRef Name="ReservationId" />
+      </Principal>
+      <Dependent Role="Invoices">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Invoices__Status__73BA3083">
+    <End Role="InvoiceStatuses" Type="Self.InvoiceStatuses" Multiplicity="0..1" />
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceStatuses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invoices">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Payment__Payment__6E01572D">
+    <End Role="PaymentTypes" Type="Self.PaymentTypes" Multiplicity="0..1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTypes">
+        <PropertyRef Name="PaymentTypeId" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="PaymentTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Payment__Reserva__6C190EBB">
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="0..1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservations">
+        <PropertyRef Name="ReservationId" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservati__Custo__619B8048">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservati__Emplo__6383C8BA">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservati__Homes__628FA481">
+    <End Role="Homestays" Type="Self.Homestays" Multiplicity="0..1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Homestays">
+        <PropertyRef Name="HomestayId" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="HomestayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservati__Statu__6477ECF3">
+    <End Role="ReservationStatuses" Type="Self.ReservationStatuses" Multiplicity="0..1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReservationStatuses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserClaims_dbo_Users_UserId">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserClaims" Type="Self.UserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserLogins_dbo_Users_UserId">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserLogins" Type="Self.UserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserRoles_dbo_Roles_RoleId">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserRoles_dbo_Users_UserId">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="DBWhiteCloudModelStoreContainer">
-    <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Homestay" EntityType="Self.Homestay" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Booking__Custome__3D5E1FD2" Association="Self.FK__Booking__Custome__3D5E1FD2">
-      <End Role="Customer" EntitySet="Customer" />
-      <End Role="Booking" EntitySet="Booking" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Homestays" EntityType="Self.Homestays" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HomestayStatuses" EntityType="Self.HomestayStatuses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceStatuses" EntityType="Self.InvoiceStatuses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReservationStatuses" EntityType="Self.ReservationStatuses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserClaims" EntityType="Self.UserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserLogins" EntityType="Self.UserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Customers__Homes__5BE2A6F2" Association="Self.FK__Customers__Homes__5BE2A6F2">
+      <End Role="Homestays" EntitySet="Homestays" />
+      <End Role="Customers" EntitySet="Customers" />
     </AssociationSet>
-    <AssociationSet Name="FK__Booking__Homesta__3C69FB99" Association="Self.FK__Booking__Homesta__3C69FB99">
-      <End Role="Homestay" EntitySet="Homestay" />
-      <End Role="Booking" EntitySet="Booking" />
+    <AssociationSet Name="FK__Customers__UserI__5AEE82B9" Association="Self.FK__Customers__UserI__5AEE82B9">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Customers" EntitySet="Customers" />
     </AssociationSet>
-    <AssociationSet Name="FK__Customer__Homest__398D8EEE" Association="Self.FK__Customer__Homest__398D8EEE">
-      <End Role="Homestay" EntitySet="Homestay" />
-      <End Role="Customer" EntitySet="Customer" />
+    <AssociationSet Name="FK__Employees__UserI__571DF1D5" Association="Self.FK__Employees__UserI__571DF1D5">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Employees" EntitySet="Employees" />
     </AssociationSet>
-    <AssociationSet Name="FK__Invoice__Booking__49C3F6B7" Association="Self.FK__Invoice__Booking__49C3F6B7">
-      <End Role="Booking" EntitySet="Booking" />
-      <End Role="Invoice" EntitySet="Invoice" />
+    <AssociationSet Name="FK__Homestays__Statu__47DBAE45" Association="Self.FK__Homestays__Statu__47DBAE45">
+      <End Role="HomestayStatuses" EntitySet="HomestayStatuses" />
+      <End Role="Homestays" EntitySet="Homestays" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Images__Homestay__4BAC3F29" Association="Self.FK__Images__Homestay__4BAC3F29">
+      <End Role="Homestays" EntitySet="Homestays" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Invoices__Reserv__72C60C4A" Association="Self.FK__Invoices__Reserv__72C60C4A">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="Invoices" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Invoices__Status__73BA3083" Association="Self.FK__Invoices__Status__73BA3083">
+      <End Role="InvoiceStatuses" EntitySet="InvoiceStatuses" />
+      <End Role="Invoices" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Payment__Payment__6E01572D" Association="Self.FK__Payment__Payment__6E01572D">
+      <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Payment__Reserva__6C190EBB" Association="Self.FK__Payment__Reserva__6C190EBB">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservati__Custo__619B8048" Association="Self.FK__Reservati__Custo__619B8048">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservati__Emplo__6383C8BA" Association="Self.FK__Reservati__Emplo__6383C8BA">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservati__Homes__628FA481" Association="Self.FK__Reservati__Homes__628FA481">
+      <End Role="Homestays" EntitySet="Homestays" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservati__Statu__6477ECF3" Association="Self.FK__Reservati__Statu__6477ECF3">
+      <End Role="ReservationStatuses" EntitySet="ReservationStatuses" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserClaims_dbo_Users_UserId" Association="Self.FK_dbo_UserClaims_dbo_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserClaims" EntitySet="UserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserLogins_dbo_Users_UserId" Association="Self.FK_dbo_UserLogins_dbo_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserLogins" EntitySet="UserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserRoles_dbo_Roles_RoleId" Association="Self.FK_dbo_UserRoles_dbo_Roles_RoleId">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserRoles_dbo_Users_UserId" Association="Self.FK_dbo_UserRoles_dbo_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

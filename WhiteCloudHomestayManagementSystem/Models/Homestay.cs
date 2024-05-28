@@ -17,20 +17,27 @@ namespace WhiteCloudHomestayManagementSystem.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Homestay()
         {
-            this.Bookings = new HashSet<Booking>();
             this.Customers = new HashSet<Customer>();
+            this.Images = new HashSet<Image>();
+            this.Reservations = new HashSet<Reservation>();
         }
     
-        public int HomestayID { get; set; }
+        public System.Guid HomestayId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
-        public Nullable<decimal> Price { get; set; }
-        public string Status { get; set; }
+        public decimal Price { get; set; }
+        public string ContactPhone { get; set; }
+        public string ContactEmail { get; set; }
+        public int Capacity { get; set; }
+        public Nullable<int> StatusId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Booking> Bookings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
+        public virtual HomestayStatus HomestayStatus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

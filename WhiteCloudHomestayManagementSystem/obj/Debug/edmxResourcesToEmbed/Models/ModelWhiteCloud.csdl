@@ -1,149 +1,475 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DBWhiteCloudModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Booking">
-    <Key>
-      <PropertyRef Name="BookingID" />
-    </Key>
-    <Property Name="BookingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="HomestayID" Type="Int32" />
-    <Property Name="CustomerID" Type="Int32" />
-    <Property Name="CheckInDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="CheckOutDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Paid" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Customer" Relationship="Self.FK__Booking__Custome__3D5E1FD2" FromRole="Booking" ToRole="Customer" />
-    <NavigationProperty Name="Homestay" Relationship="Self.FK__Booking__Homesta__3C69FB99" FromRole="Booking" ToRole="Homestay" />
-    <NavigationProperty Name="Invoices" Relationship="DBWhiteCloudModel.FK__Invoice__Booking__49C3F6B7" FromRole="Booking" ToRole="Invoice" />
-  </EntityType>
+  <EntityContainer Name="DBWhiteCloudEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="DBWhiteCloudModel.Customer" />
+    <EntitySet Name="Employees" EntityType="DBWhiteCloudModel.Employee" />
+    <EntitySet Name="Homestays" EntityType="DBWhiteCloudModel.Homestay" />
+    <EntitySet Name="HomestayStatuses" EntityType="DBWhiteCloudModel.HomestayStatus" />
+    <EntitySet Name="Images" EntityType="DBWhiteCloudModel.Image" />
+    <EntitySet Name="Invoices" EntityType="DBWhiteCloudModel.Invoice" />
+    <EntitySet Name="InvoiceStatuses" EntityType="DBWhiteCloudModel.InvoiceStatus" />
+    <EntitySet Name="Payments" EntityType="DBWhiteCloudModel.Payment" />
+    <EntitySet Name="PaymentTypes" EntityType="DBWhiteCloudModel.PaymentType" />
+    <EntitySet Name="Reservations" EntityType="DBWhiteCloudModel.Reservation" />
+    <EntitySet Name="ReservationStatuses" EntityType="DBWhiteCloudModel.ReservationStatus" />
+    <EntitySet Name="Roles" EntityType="DBWhiteCloudModel.Role" />
+    <EntitySet Name="Services" EntityType="DBWhiteCloudModel.Service" />
+    <EntitySet Name="UserClaims" EntityType="DBWhiteCloudModel.UserClaim" />
+    <EntitySet Name="UserLogins" EntityType="DBWhiteCloudModel.UserLogin" />
+    <EntitySet Name="Users" EntityType="DBWhiteCloudModel.User" />
+    <AssociationSet Name="FK__Customers__Homes__5BE2A6F2" Association="DBWhiteCloudModel.FK__Customers__Homes__5BE2A6F2">
+      <End Role="Homestay" EntitySet="Homestays" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Customers__UserI__5AEE82B9" Association="DBWhiteCloudModel.FK__Customers__UserI__5AEE82B9">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservati__Custo__619B8048" Association="DBWhiteCloudModel.FK__Reservati__Custo__619B8048">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employees__UserI__571DF1D5" Association="DBWhiteCloudModel.FK__Employees__UserI__571DF1D5">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservati__Emplo__6383C8BA" Association="DBWhiteCloudModel.FK__Reservati__Emplo__6383C8BA">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Homestays__Statu__47DBAE45" Association="DBWhiteCloudModel.FK__Homestays__Statu__47DBAE45">
+      <End Role="HomestayStatus" EntitySet="HomestayStatuses" />
+      <End Role="Homestay" EntitySet="Homestays" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Images__Homestay__4BAC3F29" Association="DBWhiteCloudModel.FK__Images__Homestay__4BAC3F29">
+      <End Role="Homestay" EntitySet="Homestays" />
+      <End Role="Image" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservati__Homes__628FA481" Association="DBWhiteCloudModel.FK__Reservati__Homes__628FA481">
+      <End Role="Homestay" EntitySet="Homestays" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Invoices__Reserv__72C60C4A" Association="DBWhiteCloudModel.FK__Invoices__Reserv__72C60C4A">
+      <End Role="Reservation" EntitySet="Reservations" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Invoices__Status__73BA3083" Association="DBWhiteCloudModel.FK__Invoices__Status__73BA3083">
+      <End Role="InvoiceStatus" EntitySet="InvoiceStatuses" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Payment__Payment__6E01572D" Association="DBWhiteCloudModel.FK__Payment__Payment__6E01572D">
+      <End Role="PaymentType" EntitySet="PaymentTypes" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Payment__Reserva__6C190EBB" Association="DBWhiteCloudModel.FK__Payment__Reserva__6C190EBB">
+      <End Role="Reservation" EntitySet="Reservations" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reservati__Statu__6477ECF3" Association="DBWhiteCloudModel.FK__Reservati__Statu__6477ECF3">
+      <End Role="ReservationStatus" EntitySet="ReservationStatuses" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserClaims_dbo_Users_UserId" Association="DBWhiteCloudModel.FK_dbo_UserClaims_dbo_Users_UserId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserClaim" EntitySet="UserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserLogins_dbo_Users_UserId" Association="DBWhiteCloudModel.FK_dbo_UserLogins_dbo_Users_UserId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserLogin" EntitySet="UserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="UserRoles" Association="DBWhiteCloudModel.UserRoles">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="Customer">
     <Key>
-      <PropertyRef Name="CustomerID" />
+      <PropertyRef Name="CustomerId" />
     </Key>
-    <Property Name="CustomerID" Type="Int32" Nullable="false" />
-    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="IdCardImg" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="HomestayID" Type="Int32" />
-    <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__Custome__3D5E1FD2" FromRole="Customer" ToRole="Booking" />
-    <NavigationProperty Name="Homestay" Relationship="Self.FK__Customer__Homest__398D8EEE" FromRole="Customer" ToRole="Homestay" />
-    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerId" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FullName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IdCardImg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IdCardNum" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="HomestayId" Type="Guid" />
+    <NavigationProperty Name="Homestay" Relationship="DBWhiteCloudModel.FK__Customers__Homes__5BE2A6F2" FromRole="Customer" ToRole="Homestay" />
+    <NavigationProperty Name="User" Relationship="DBWhiteCloudModel.FK__Customers__UserI__5AEE82B9" FromRole="Customer" ToRole="User" />
+    <NavigationProperty Name="Reservations" Relationship="DBWhiteCloudModel.FK__Reservati__Custo__619B8048" FromRole="Customer" ToRole="Reservation" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
-      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="EmployeeId" />
     </Key>
-    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
-    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeId" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FullName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Salary" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="IdCardImg" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Salary" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IdCardImg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="DBWhiteCloudModel.FK__Employees__UserI__571DF1D5" FromRole="Employee" ToRole="User" />
+    <NavigationProperty Name="Reservations" Relationship="DBWhiteCloudModel.FK__Reservati__Emplo__6383C8BA" FromRole="Employee" ToRole="Reservation" />
   </EntityType>
   <EntityType Name="Homestay">
     <Key>
-      <PropertyRef Name="HomestayID" />
+      <PropertyRef Name="HomestayId" />
     </Key>
-    <Property Name="HomestayID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="HomestayId" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__Homesta__3C69FB99" FromRole="Homestay" ToRole="Booking" />
-    <NavigationProperty Name="Customers" Relationship="Self.FK__Customer__Homest__398D8EEE" FromRole="Homestay" ToRole="Customer" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="ContactPhone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ContactEmail" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Capacity" Type="Int32" Nullable="false" />
+    <Property Name="StatusId" Type="Int32" />
+    <NavigationProperty Name="Customers" Relationship="DBWhiteCloudModel.FK__Customers__Homes__5BE2A6F2" FromRole="Homestay" ToRole="Customer" />
+    <NavigationProperty Name="HomestayStatus" Relationship="DBWhiteCloudModel.FK__Homestays__Statu__47DBAE45" FromRole="Homestay" ToRole="HomestayStatus" />
+    <NavigationProperty Name="Images" Relationship="DBWhiteCloudModel.FK__Images__Homestay__4BAC3F29" FromRole="Homestay" ToRole="Image" />
+    <NavigationProperty Name="Reservations" Relationship="DBWhiteCloudModel.FK__Reservati__Homes__628FA481" FromRole="Homestay" ToRole="Reservation" />
+  </EntityType>
+  <EntityType Name="HomestayStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Homestays" Relationship="DBWhiteCloudModel.FK__Homestays__Statu__47DBAE45" FromRole="HomestayStatus" ToRole="Homestay" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="ImageId" />
+    </Key>
+    <Property Name="ImageId" Type="Guid" Nullable="false" />
+    <Property Name="HomestayId" Type="Guid" />
+    <Property Name="ImageUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Homestay" Relationship="DBWhiteCloudModel.FK__Images__Homestay__4BAC3F29" FromRole="Image" ToRole="Homestay" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReservationId" Type="Guid" />
+    <Property Name="StatusId" Type="Int32" />
+    <Property Name="IssuedDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CheckOutDate" Type="DateTime" Precision="0" />
+    <Property Name="HomestayCharge" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="ServiceCharge" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Surcharge" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <NavigationProperty Name="Reservation" Relationship="DBWhiteCloudModel.FK__Invoices__Reserv__72C60C4A" FromRole="Invoice" ToRole="Reservation" />
+    <NavigationProperty Name="InvoiceStatus" Relationship="DBWhiteCloudModel.FK__Invoices__Status__73BA3083" FromRole="Invoice" ToRole="InvoiceStatus" />
+  </EntityType>
+  <EntityType Name="InvoiceStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Invoices" Relationship="DBWhiteCloudModel.FK__Invoices__Status__73BA3083" FromRole="InvoiceStatus" ToRole="Invoice" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="PaymentId" />
+    </Key>
+    <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReservationId" Type="Guid" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IssuedDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PaymentTypeId" Type="Int32" />
+    <NavigationProperty Name="PaymentType" Relationship="DBWhiteCloudModel.FK__Payment__Payment__6E01572D" FromRole="Payment" ToRole="PaymentType" />
+    <NavigationProperty Name="Reservation" Relationship="DBWhiteCloudModel.FK__Payment__Reserva__6C190EBB" FromRole="Payment" ToRole="Reservation" />
+  </EntityType>
+  <EntityType Name="PaymentType">
+    <Key>
+      <PropertyRef Name="PaymentTypeId" />
+    </Key>
+    <Property Name="PaymentTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Payments" Relationship="DBWhiteCloudModel.FK__Payment__Payment__6E01572D" FromRole="PaymentType" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="ReservationId" />
+    </Key>
+    <Property Name="ReservationId" Type="Guid" Nullable="false" />
+    <Property Name="CustomerId" Type="Guid" />
+    <Property Name="HomestayId" Type="Guid" />
+    <Property Name="EmployeeId" Type="Guid" />
+    <Property Name="CheckInDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CheckOutDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StatusId" Type="Int32" />
+    <Property Name="NumOfAdults" Type="Int32" Nullable="false" />
+    <Property Name="NumOfChild" Type="Int32" />
+    <Property Name="SpecialRequests" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Customer" Relationship="DBWhiteCloudModel.FK__Reservati__Custo__619B8048" FromRole="Reservation" ToRole="Customer" />
+    <NavigationProperty Name="Employee" Relationship="DBWhiteCloudModel.FK__Reservati__Emplo__6383C8BA" FromRole="Reservation" ToRole="Employee" />
+    <NavigationProperty Name="Homestay" Relationship="DBWhiteCloudModel.FK__Reservati__Homes__628FA481" FromRole="Reservation" ToRole="Homestay" />
+    <NavigationProperty Name="Invoices" Relationship="DBWhiteCloudModel.FK__Invoices__Reserv__72C60C4A" FromRole="Reservation" ToRole="Invoice" />
+    <NavigationProperty Name="Payments" Relationship="DBWhiteCloudModel.FK__Payment__Reserva__6C190EBB" FromRole="Reservation" ToRole="Payment" />
+    <NavigationProperty Name="ReservationStatus" Relationship="DBWhiteCloudModel.FK__Reservati__Statu__6477ECF3" FromRole="Reservation" ToRole="ReservationStatus" />
+  </EntityType>
+  <EntityType Name="ReservationStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Reservations" Relationship="DBWhiteCloudModel.FK__Reservati__Statu__6477ECF3" FromRole="ReservationStatus" ToRole="Reservation" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="DBWhiteCloudModel.UserRoles" FromRole="Role" ToRole="User" />
   </EntityType>
   <EntityType Name="Service">
     <Key>
-      <PropertyRef Name="ServiceID" />
+      <PropertyRef Name="ServiceId" />
     </Key>
-    <Property Name="ServiceID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
   </EntityType>
-  <Association Name="FK__Booking__Custome__3D5E1FD2">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="CustomerID" />
-      </Principal>
-      <Dependent Role="Booking">
-        <PropertyRef Name="CustomerID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Booking__Homesta__3C69FB99">
-    <End Role="Homestay" Type="Self.Homestay" Multiplicity="0..1" />
-    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+  <EntityType Name="UserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="DBWhiteCloudModel.FK_dbo_UserClaims_dbo_Users_UserId" FromRole="UserClaim" ToRole="User" />
+  </EntityType>
+  <EntityType Name="UserLogin">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="DBWhiteCloudModel.FK_dbo_UserLogins_dbo_Users_UserId" FromRole="UserLogin" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEnd" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Customers" Relationship="DBWhiteCloudModel.FK__Customers__UserI__5AEE82B9" FromRole="User" ToRole="Customer" />
+    <NavigationProperty Name="Employees" Relationship="DBWhiteCloudModel.FK__Employees__UserI__571DF1D5" FromRole="User" ToRole="Employee" />
+    <NavigationProperty Name="UserClaims" Relationship="DBWhiteCloudModel.FK_dbo_UserClaims_dbo_Users_UserId" FromRole="User" ToRole="UserClaim" />
+    <NavigationProperty Name="UserLogins" Relationship="DBWhiteCloudModel.FK_dbo_UserLogins_dbo_Users_UserId" FromRole="User" ToRole="UserLogin" />
+    <NavigationProperty Name="Roles" Relationship="DBWhiteCloudModel.UserRoles" FromRole="User" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK__Customers__Homes__5BE2A6F2">
+    <End Type="DBWhiteCloudModel.Homestay" Role="Homestay" Multiplicity="0..1" />
+    <End Type="DBWhiteCloudModel.Customer" Role="Customer" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Homestay">
-        <PropertyRef Name="HomestayID" />
-      </Principal>
-      <Dependent Role="Booking">
-        <PropertyRef Name="HomestayID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Customer__Homest__398D8EEE">
-    <End Role="Homestay" Type="Self.Homestay" Multiplicity="0..1" />
-    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Homestay">
-        <PropertyRef Name="HomestayID" />
+        <PropertyRef Name="HomestayId" />
       </Principal>
       <Dependent Role="Customer">
-        <PropertyRef Name="HomestayID" />
+        <PropertyRef Name="HomestayId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DBWhiteCloudEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Bookings" EntityType="Self.Booking" />
-    <EntitySet Name="Customers" EntityType="Self.Customer" />
-    <EntitySet Name="Employees" EntityType="Self.Employee" />
-    <EntitySet Name="Homestays" EntityType="Self.Homestay" />
-    <EntitySet Name="Services" EntityType="Self.Service" />
-    <AssociationSet Name="FK__Booking__Custome__3D5E1FD2" Association="Self.FK__Booking__Custome__3D5E1FD2">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="Booking" EntitySet="Bookings" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Booking__Homesta__3C69FB99" Association="Self.FK__Booking__Homesta__3C69FB99">
-      <End Role="Homestay" EntitySet="Homestays" />
-      <End Role="Booking" EntitySet="Bookings" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Customer__Homest__398D8EEE" Association="Self.FK__Customer__Homest__398D8EEE">
-      <End Role="Homestay" EntitySet="Homestays" />
-      <End Role="Customer" EntitySet="Customers" />
-    </AssociationSet>
-    <EntitySet Name="Invoices" EntityType="DBWhiteCloudModel.Invoice" />
-    <AssociationSet Name="FK__Invoice__Booking__49C3F6B7" Association="DBWhiteCloudModel.FK__Invoice__Booking__49C3F6B7">
-      <End Role="Booking" EntitySet="Bookings" />
-      <End Role="Invoice" EntitySet="Invoices" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Invoice">
-    <Key>
-      <PropertyRef Name="InvoiceID" />
-    </Key>
-    <Property Name="InvoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BookingID" Type="Int32" />
-    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IssuedDate" Type="DateTime" Nullable="false" Precision="0" />
-    <NavigationProperty Name="Booking" Relationship="DBWhiteCloudModel.FK__Invoice__Booking__49C3F6B7" FromRole="Invoice" ToRole="Booking" />
-  </EntityType>
-  <Association Name="FK__Invoice__Booking__49C3F6B7">
-    <End Type="DBWhiteCloudModel.Booking" Role="Booking" Multiplicity="0..1" />
-    <End Type="DBWhiteCloudModel.Invoice" Role="Invoice" Multiplicity="*" />
+  <Association Name="FK__Customers__UserI__5AEE82B9">
+    <End Type="DBWhiteCloudModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="DBWhiteCloudModel.Customer" Role="Customer" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Booking">
-        <PropertyRef Name="BookingID" />
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Invoice">
-        <PropertyRef Name="BookingID" />
+      <Dependent Role="Customer">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservati__Custo__619B8048">
+    <End Type="DBWhiteCloudModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="DBWhiteCloudModel.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employees__UserI__571DF1D5">
+    <End Type="DBWhiteCloudModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="DBWhiteCloudModel.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservati__Emplo__6383C8BA">
+    <End Type="DBWhiteCloudModel.Employee" Role="Employee" Multiplicity="0..1" />
+    <End Type="DBWhiteCloudModel.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Homestays__Statu__47DBAE45">
+    <End Type="DBWhiteCloudModel.HomestayStatus" Role="HomestayStatus" Multiplicity="0..1" />
+    <End Type="DBWhiteCloudModel.Homestay" Role="Homestay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HomestayStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Homestay">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Images__Homestay__4BAC3F29">
+    <End Type="DBWhiteCloudModel.Homestay" Role="Homestay" Multiplicity="0..1" />
+    <End Type="DBWhiteCloudModel.Image" Role="Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Homestay">
+        <PropertyRef Name="HomestayId" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="HomestayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservati__Homes__628FA481">
+    <End Type="DBWhiteCloudModel.Homestay" Role="Homestay" Multiplicity="0..1" />
+    <End Type="DBWhiteCloudModel.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Homestay">
+        <PropertyRef Name="HomestayId" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="HomestayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Invoices__Reserv__72C60C4A">
+    <End Type="DBWhiteCloudModel.Reservation" Role="Reservation" Multiplicity="0..1" />
+    <End Type="DBWhiteCloudModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservation">
+        <PropertyRef Name="ReservationId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Invoices__Status__73BA3083">
+    <End Type="DBWhiteCloudModel.InvoiceStatus" Role="InvoiceStatus" Multiplicity="0..1" />
+    <End Type="DBWhiteCloudModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Payment__Payment__6E01572D">
+    <End Type="DBWhiteCloudModel.PaymentType" Role="PaymentType" Multiplicity="0..1" />
+    <End Type="DBWhiteCloudModel.Payment" Role="Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentType">
+        <PropertyRef Name="PaymentTypeId" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="PaymentTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Payment__Reserva__6C190EBB">
+    <End Type="DBWhiteCloudModel.Reservation" Role="Reservation" Multiplicity="0..1" />
+    <End Type="DBWhiteCloudModel.Payment" Role="Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservation">
+        <PropertyRef Name="ReservationId" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="ReservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reservati__Statu__6477ECF3">
+    <End Type="DBWhiteCloudModel.ReservationStatus" Role="ReservationStatus" Multiplicity="0..1" />
+    <End Type="DBWhiteCloudModel.Reservation" Role="Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReservationStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserClaims_dbo_Users_UserId">
+    <End Type="DBWhiteCloudModel.User" Role="User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DBWhiteCloudModel.UserClaim" Role="UserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserLogins_dbo_Users_UserId">
+    <End Type="DBWhiteCloudModel.User" Role="User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DBWhiteCloudModel.UserLogin" Role="UserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRoles">
+    <End Type="DBWhiteCloudModel.Role" Role="Role" Multiplicity="*" />
+    <End Type="DBWhiteCloudModel.User" Role="User" Multiplicity="*" />
   </Association>
 </Schema>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WhiteCloudHomestayManagementSystem.Models.Reservation>
+
+@{
+    ViewBag.Title = "Reservations";
+    Layout = "~/Areas/Receptionist/Views/Shared/_ReceptionistNavbar.cshtml";
+}
+
+<h2>Reservations</h2>
+
+<table class="table">
+    <tr>
+        <th>Reservation ID</th>
+        <th>Customer</th>
+        <th>Homestay</th>
+        <th>Check-In Date</th>
+        <th>Check-Out Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var reservation in Model)
+    {
+        <tr>
+            <td>@reservation.ReservationId</td>
+            <td>@reservation.Customer.FullName</td>
+            <td>@reservation.Homestay.Name</td>
+            <td>@reservation.CheckInDate.ToShortDateString()</td>
+            <td>@reservation.CheckOutDate.ToShortDateString()</td>
+            <td>@reservation.ReservationStatus.StatusName</td>
+            <td>
+                @if (reservation.StatusId == 1) // Pending status
+                {
+                    <button class="btn btn-success" onclick="location.href='@Url.Action("CheckIn", "Receptionist", new { reservationID = reservation.ReservationId })'">Check-In</button>
+                }
+                else if (reservation.StatusId == 2) // Checked-in status
+                {
+                    <button class="btn btn-danger" onclick="location.href='@Url.Action("CheckOut", "Receptionist", new { reservationID = reservation.ReservationId })'">Check-Out</button>
+                }
+                else
+                {
+                    <span>Completed</span>
+                }
+            </td>
+        </tr>
+    }
+</table>

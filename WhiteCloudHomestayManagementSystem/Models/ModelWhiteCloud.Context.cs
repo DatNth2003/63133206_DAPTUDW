@@ -25,11 +25,21 @@ namespace WhiteCloudHomestayManagementSystem.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Booking> Bookings { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Homestay> Homestays { get; set; }
-        public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<HomestayStatus> HomestayStatuses { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<InvoiceStatus> InvoiceStatuses { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<PaymentType> PaymentTypes { get; set; }
+        public virtual DbSet<Reservation> Reservations { get; set; }
+        public virtual DbSet<ReservationStatus> ReservationStatuses { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<UserClaim> UserClaims { get; set; }
+        public virtual DbSet<UserLogin> UserLogins { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

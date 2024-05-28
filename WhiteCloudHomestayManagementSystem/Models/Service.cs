@@ -14,9 +14,9 @@ namespace WhiteCloudHomestayManagementSystem.Models
     
     public partial class Service
     {
-        public int ServiceID { get; set; }
+        public int ServiceId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public decimal Price { get; set; }
     }
 }

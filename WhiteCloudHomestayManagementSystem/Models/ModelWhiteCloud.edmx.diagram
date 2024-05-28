@@ -4,17 +4,39 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7a7cf210b31645a4b4f7b38ad3fb5da3" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="DBWhiteCloudModel.Booking" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBWhiteCloudModel.Customer" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBWhiteCloudModel.Employee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBWhiteCloudModel.Homestay" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBWhiteCloudModel.Service" Width="1.5" PointX="2.75" PointY="1.25" IsExpanded="true" />
-        <AssociationConnector Association="DBWhiteCloudModel.FK__Booking__Custome__3D5E1FD2" ManuallyRouted="false" />
-        <AssociationConnector Association="DBWhiteCloudModel.FK__Booking__Homesta__3C69FB99" ManuallyRouted="false" />
-        <AssociationConnector Association="DBWhiteCloudModel.FK__Customer__Homest__398D8EEE" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DBWhiteCloudModel.Invoice" Width="1.5" PointX="7.5" PointY="6.625" />
-        <AssociationConnector Association="DBWhiteCloudModel.FK__Invoice__Booking__49C3F6B7" />
+      <Diagram DiagramId="a79c5fa154284a96ba105630b6052d25" Name="Diagram1" ZoomLevel="45">
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Customer" Width="1.5" PointX="8.25" PointY="6.375" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Employee" Width="1.5" PointX="8.25" PointY="10.75" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Homestay" Width="1.5" PointX="3" PointY="6.25" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.HomestayStatus" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Image" Width="1.5" PointX="5.25" PointY="7.125" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Invoice" Width="1.5" PointX="15.75" PointY="6.375" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.InvoiceStatus" Width="1.5" PointX="13.5" PointY="4.25" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Payment" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.PaymentType" Width="1.5" PointX="10.5" PointY="3.25" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Reservation" Width="1.5" PointX="10.5" PointY="5.875" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.ReservationStatus" Width="1.5" PointX="8.25" PointY="3.375" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Role" Width="1.5" PointX="3.75" PointY="3.375" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.Service" Width="1.5" PointX="0.75" PointY="3" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.UserClaim" Width="1.5" PointX="8.25" PointY="17.125" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.UserLogin" Width="1.5" PointX="8.25" PointY="14.5" />
+        <EntityTypeShape EntityType="DBWhiteCloudModel.User" Width="1.5" PointX="6" PointY="0.75" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Customers__Homes__5BE2A6F2" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Customers__UserI__5AEE82B9" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Reservati__Custo__619B8048" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Employees__UserI__571DF1D5" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Reservati__Emplo__6383C8BA" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Homestays__Statu__47DBAE45" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Images__Homestay__4BAC3F29" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Reservati__Homes__628FA481" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Invoices__Reserv__72C60C4A" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Invoices__Status__73BA3083" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Payment__Payment__6E01572D" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Payment__Reserva__6C190EBB" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK__Reservati__Statu__6477ECF3" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK_dbo_UserClaims_dbo_Users_UserId" />
+        <AssociationConnector Association="DBWhiteCloudModel.FK_dbo_UserLogins_dbo_Users_UserId" />
+        <AssociationConnector Association="DBWhiteCloudModel.UserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
