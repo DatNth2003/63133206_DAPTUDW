@@ -13,7 +13,6 @@
     <EntitySet Name="Reservations" EntityType="DBWhiteCloudModel.Reservation" />
     <EntitySet Name="ReservationStatuses" EntityType="DBWhiteCloudModel.ReservationStatus" />
     <EntitySet Name="Roles" EntityType="DBWhiteCloudModel.Role" />
-    <EntitySet Name="Services" EntityType="DBWhiteCloudModel.Service" />
     <EntitySet Name="UserClaims" EntityType="DBWhiteCloudModel.UserClaim" />
     <EntitySet Name="UserLogins" EntityType="DBWhiteCloudModel.UserLogin" />
     <EntitySet Name="Users" EntityType="DBWhiteCloudModel.User" />
@@ -81,6 +80,12 @@
       <End Role="Role" EntitySet="Roles" />
       <End Role="User" EntitySet="Users" />
     </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="DBWhiteCloudModel.sysdiagram" />
+    <EntitySet Name="Services" EntityType="DBWhiteCloudModel.Service" />
+    <AssociationSet Name="HomestayServices" Association="DBWhiteCloudModel.HomestayServices">
+      <End Role="Homestay" EntitySet="Homestays" />
+      <End Role="Service" EntitySet="Services" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Customer">
     <Key>
@@ -130,6 +135,7 @@
     <NavigationProperty Name="HomestayStatus" Relationship="DBWhiteCloudModel.FK__Homestays__Statu__47DBAE45" FromRole="Homestay" ToRole="HomestayStatus" />
     <NavigationProperty Name="Images" Relationship="DBWhiteCloudModel.FK__Images__Homestay__4BAC3F29" FromRole="Homestay" ToRole="Image" />
     <NavigationProperty Name="Reservations" Relationship="DBWhiteCloudModel.FK__Reservati__Homes__628FA481" FromRole="Homestay" ToRole="Reservation" />
+    <NavigationProperty Name="Services" Relationship="DBWhiteCloudModel.HomestayServices" FromRole="Homestay" ToRole="Service" />
   </EntityType>
   <EntityType Name="HomestayStatus">
     <Key>
@@ -230,15 +236,6 @@
     <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Users" Relationship="DBWhiteCloudModel.UserRoles" FromRole="Role" ToRole="User" />
-  </EntityType>
-  <EntityType Name="Service">
-    <Key>
-      <PropertyRef Name="ServiceId" />
-    </Key>
-    <Property Name="ServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="UserClaim">
     <Key>
@@ -471,5 +468,30 @@
   <Association Name="UserRoles">
     <End Type="DBWhiteCloudModel.Role" Role="Role" Multiplicity="*" />
     <End Type="DBWhiteCloudModel.User" Role="User" Multiplicity="*" />
+  </Association>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ServiceId" />
+    </Key>
+    <Property Name="ServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Icon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Homestays" Relationship="DBWhiteCloudModel.HomestayServices" FromRole="Service" ToRole="Homestay" />
+  </EntityType>
+  <Association Name="HomestayServices">
+    <End Type="DBWhiteCloudModel.Homestay" Role="Homestay" Multiplicity="*" />
+    <End Type="DBWhiteCloudModel.Service" Role="Service" Multiplicity="*" />
   </Association>
 </Schema>

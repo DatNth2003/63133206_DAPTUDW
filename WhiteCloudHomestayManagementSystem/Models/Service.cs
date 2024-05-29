@@ -14,9 +14,19 @@ namespace WhiteCloudHomestayManagementSystem.Models
     
     public partial class Service
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Service()
+        {
+            this.Homestays = new HashSet<Homestay>();
+        }
+    
         public int ServiceId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
+        public string Icon { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Homestay> Homestays { get; set; }
     }
 }

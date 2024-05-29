@@ -195,6 +195,7 @@
     <Compile Include="Areas\Manager\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Manager\Controllers\HomestaysController.cs" />
     <Compile Include="Areas\Manager\Controllers\ReservationsController.cs" />
+    <Compile Include="Areas\Manager\Controllers\ServicesController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
     <Compile Include="Areas\Receptionist\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Receptionist\Controllers\HomestaysController.cs" />
@@ -264,6 +265,9 @@
       <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Service.cs">
+      <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>ModelWhiteCloud.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
@@ -379,6 +383,11 @@
     <Content Include="Areas\Manager\Views\Customers\Details.cshtml" />
     <Content Include="Areas\Manager\Views\Customers\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\Customers\Index.cshtml" />
+    <Content Include="Areas\Manager\Views\Services\Create.cshtml" />
+    <Content Include="Areas\Manager\Views\Services\Delete.cshtml" />
+    <Content Include="Areas\Manager\Views\Services\Details.cshtml" />
+    <Content Include="Areas\Manager\Views\Services\Edit.cshtml" />
+    <Content Include="Areas\Manager\Views\Services\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -40,6 +40,14 @@
     <Property Name="Capacity" Type="int" Nullable="false" />
     <Property Name="StatusId" Type="int" />
   </EntityType>
+  <EntityType Name="HomestayServices">
+    <Key>
+      <PropertyRef Name="HomestayId" />
+      <PropertyRef Name="ServiceId" />
+    </Key>
+    <Property Name="HomestayId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ServiceId" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="HomestayStatuses">
     <Key>
       <PropertyRef Name="Id" />
@@ -132,6 +140,17 @@
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Icon" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="UserClaims">
     <Key>
@@ -211,6 +230,30 @@
       </Principal>
       <Dependent Role="Employees">
         <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HomestayS__Homes__17F790F9">
+    <End Role="Homestays" Type="Self.Homestays" Multiplicity="1" />
+    <End Role="HomestayServices" Type="Self.HomestayServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Homestays">
+        <PropertyRef Name="HomestayId" />
+      </Principal>
+      <Dependent Role="HomestayServices">
+        <PropertyRef Name="HomestayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HomestayS__Servi__18EBB532">
+    <End Role="Services" Type="Self.Services" Multiplicity="1" />
+    <End Role="HomestayServices" Type="Self.HomestayServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="ServiceId" />
+      </Principal>
+      <Dependent Role="HomestayServices">
+        <PropertyRef Name="ServiceId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -394,6 +437,7 @@
     <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Homestays" EntityType="Self.Homestays" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HomestayServices" EntityType="Self.HomestayServices" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HomestayStatuses" EntityType="Self.HomestayStatuses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
@@ -404,6 +448,7 @@
     <EntitySet Name="ReservationStatuses" EntityType="Self.ReservationStatuses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserClaims" EntityType="Self.UserClaims" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserLogins" EntityType="Self.UserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
@@ -419,6 +464,14 @@
     <AssociationSet Name="FK__Employees__UserI__571DF1D5" Association="Self.FK__Employees__UserI__571DF1D5">
       <End Role="Users" EntitySet="Users" />
       <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HomestayS__Homes__17F790F9" Association="Self.FK__HomestayS__Homes__17F790F9">
+      <End Role="Homestays" EntitySet="Homestays" />
+      <End Role="HomestayServices" EntitySet="HomestayServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HomestayS__Servi__18EBB532" Association="Self.FK__HomestayS__Servi__18EBB532">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="HomestayServices" EntitySet="HomestayServices" />
     </AssociationSet>
     <AssociationSet Name="FK__Homestays__Statu__47DBAE45" Association="Self.FK__Homestays__Statu__47DBAE45">
       <End Role="HomestayStatuses" EntitySet="HomestayStatuses" />

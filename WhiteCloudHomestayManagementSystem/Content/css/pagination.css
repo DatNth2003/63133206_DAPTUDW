@@ -69,3 +69,21 @@
     background-color: #fff;
     border-color: #dee2e6;
 }
+.pagination-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+    .pagination-buttons a {
+        display: inline-block;
+        margin: 0 2px;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        color: #333;
+        text-decoration: none;
+    }
+
+        .pagination-buttons a:hover {
+            background-color: #ddd;
+        }
