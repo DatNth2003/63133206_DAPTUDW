@@ -192,11 +192,12 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Manager\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Manager\Controllers\HomestaysController.cs" />
     <Compile Include="Areas\Manager\Controllers\ReservationsController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
-    <Compile Include="Areas\Receptionist\Controllers\CheckInController.cs" />
     <Compile Include="Areas\Receptionist\Controllers\CustomersController.cs" />
+    <Compile Include="Areas\Receptionist\Controllers\HomestaysController.cs" />
     <Compile Include="Areas\Receptionist\Controllers\ReceptionistsController.cs" />
     <Compile Include="Areas\Receptionist\Controllers\ReservationsController.cs" />
     <Compile Include="Areas\Receptionist\ReceptionistAreaRegistration.cs" />
@@ -277,6 +278,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CheckInVM.cs" />
+    <Compile Include="ViewModels\NewCustomerVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -357,7 +359,6 @@
     <Content Include="Areas\Receptionist\Views\Customers\Details.cshtml" />
     <Content Include="Areas\Receptionist\Views\Customers\Edit.cshtml" />
     <Content Include="Areas\Receptionist\Views\Customers\Index.cshtml" />
-    <Content Include="Areas\Receptionist\Views\CheckIn\Create.cshtml" />
     <Content Include="Areas\Manager\Views\Reservations\Create.cshtml" />
     <Content Include="Areas\Manager\Views\Reservations\Delete.cshtml" />
     <Content Include="Areas\Manager\Views\Reservations\Details.cshtml" />
@@ -370,6 +371,14 @@
     <Content Include="Areas\Manager\Views\Homestays\Details.cshtml" />
     <Content Include="Areas\Manager\Views\Homestays\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\Homestays\Index.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Receptionists\NewCheckIn.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Homestays\Details.cshtml" />
+    <Content Include="Areas\Receptionist\Views\Homestays\Index.cshtml" />
+    <Content Include="Areas\Manager\Views\Customers\Create.cshtml" />
+    <Content Include="Areas\Manager\Views\Customers\Delete.cshtml" />
+    <Content Include="Areas\Manager\Views\Customers\Details.cshtml" />
+    <Content Include="Areas\Manager\Views\Customers\Edit.cshtml" />
+    <Content Include="Areas\Manager\Views\Customers\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -420,12 +429,13 @@
     <Content Include="Views\Services\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\Images\Customers\IdCards\" />
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Manager\Data\" />
     <Folder Include="Areas\Receptionist\Data\" />
     <Folder Include="Areas\Staff\Data\" />
     <Folder Include="Areas\Staff\Views\Shared\" />
+    <Folder Include="Uploads\Images\Customers\IdCardImgs\" />
     <Folder Include="Views\Auth\" />
   </ItemGroup>
   <ItemGroup>

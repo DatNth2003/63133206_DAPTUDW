@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WhiteCloudHomestayManagementSystem.Models;
+using WhiteCloudHomestayManagementSystem.ViewModels;
 
 namespace WhiteCloudHomestayManagementSystem.Areas.Receptionist.Controllers
 {
@@ -37,36 +38,66 @@ namespace WhiteCloudHomestayManagementSystem.Areas.Receptionist.Controllers
         }
 
         // GET: Receptionist/Reservations/Create
-        public ActionResult Create()
+        public ActionResult Create(Guid? homestayId)
         {
+
+            if (homestayId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var homestay = db.Homestays.Find(homestayId);
+            if (homestay == null)
+            {
+                return HttpNotFound();
+            }
+
             ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FullName");
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FullName");
-            ViewBag.HomestayId = new SelectList(db.Homestays, "HomestayId", "Name");
-            ViewBag.StatusId = new SelectList(db.Reservations, "StatusId", "StatusName");
-            return View();
-        }
+            ViewBag.Homestay = homestay;
 
+            var reservation = new Reservation
+            {
+                HomestayId = homestay.HomestayId,
+                StatusId = 1
+            };
+
+            return View(reservation);
+        }
         // POST: Receptionist/Reservations/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ReservationId,CustomerId,HomestayId,EmployeeId,CheckInDate,CheckOutDate,StatusId")] Reservation reservation)
+        public ActionResult Create(Reservation reservation, NewCustomerVM newCustomer)
         {
             if (ModelState.IsValid)
             {
-                reservation.ReservationId = Guid.NewGuid();
                 db.Reservations.Add(reservation);
                 db.SaveChanges();
+
+                if (!string.IsNullOrEmpty(newCustomer.FullName) && !string.IsNullOrEmpty(newCustomer.Email) && !string.IsNullOrEmpty(newCustomer.Phone))
+                {
+                    var customer = new Customer
+                    {
+                        FullName = newCustomer.FullName,
+                        Email = newCustomer.Email,
+                        Phone = newCustomer.Phone
+                    };
+
+                    db.Customers.Add(customer);
+                    db.SaveChanges();
+
+                    reservation.CustomerId = customer.CustomerId;
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Homestay = db.Homestays.Find(reservation.HomestayId);
             ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FullName", reservation.CustomerId);
-            ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FullName", reservation.EmployeeId);
-            ViewBag.HomestayId = new SelectList(db.Homestays, "HomestayId", "Name", reservation.HomestayId);
-            ViewBag.StatusId = new SelectList(db.Reservations, "StatusId", "StatusName", reservation.StatusId);
             return View(reservation);
         }
+
 
         // GET: Receptionist/Reservations/Edit/5
         public ActionResult Edit(Guid? id)

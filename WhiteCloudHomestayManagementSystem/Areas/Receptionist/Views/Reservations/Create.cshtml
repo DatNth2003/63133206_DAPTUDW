@@ -1,72 +1,91 @@
 ﻿@model WhiteCloudHomestayManagementSystem.Models.Reservation
 
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Areas/Receptionist/Views/Shared/_ReceptionistNavbar.cshtml";
+    ViewBag.Title = "Create Reservation";
 }
 
-<h2>Create</h2>
+<h2>Create Reservation</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Reservation</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.CustomerId, "CustomerId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CustomerId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <h5 class="card-header">Homestay Information</h5>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
+                            @Html.HiddenFor(model => model.HomestayId)
+                            <h5 class="card-title">@ViewBag.Homestay.Name</h5>
+                            <p class="card-text">Address: @ViewBag.Homestay.Address</p>
+                            <p class="card-text">Price: @ViewBag.Homestay.Price</p>
+                            <p class="card-text">Capacity: @ViewBag.Homestay.Capacity</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeId, "Employee", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("EmployeeId", (SelectList)ViewBag.EmployeeId, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CheckInDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.CheckInDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                        @Html.ValidationMessageFor(model => model.CheckInDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CheckOutDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.CheckOutDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                        @Html.ValidationMessageFor(model => model.CheckOutDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @Html.HiddenFor(model => model.StatusId, new { Value = 1 })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HomestayId, "HomestayId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("HomestayId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.HomestayId, "", new { @class = "text-danger" })
+        <div class="col-md-6">
+            <div class="form-horizontal">
+                <hr />
+
+                <div class="form-group">
+                    @Html.Label("Customer", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.RadioButton("CustomerType", "existing", true, new { @id = "existing-customer" }) @Html.Label("existing-customer", "Existing Customer")
+                        @Html.DropDownListFor(model => model.CustomerId, (SelectList)ViewBag.CustomerId, "-- Select Customer --", htmlAttributes: new { @class = "form-control existing-customer-list" })
+                        @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.RadioButton("CustomerType", "new", false, new { @id = "new-customer" }) @Html.Label("new-customer", "New Customer")
+                        <div class="new-customer-info" style="display:none;">
+                            <input type="text" id="NewCustomerName" name="NewCustomerName" class="form-control" placeholder="Customer Name" />
+                            <input type="email" id="NewCustomerEmail" name="NewCustomerEmail" class="form-control" placeholder="Customer Email" />
+                            <input type="text" id="NewCustomerPhone" name="NewCustomerPhone" class="form-control" placeholder="Customer Phone" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmployeeId, "EmployeeId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("EmployeeId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CheckInDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CheckInDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CheckInDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CheckOutDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CheckOutDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CheckOutDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.StatusId, "StatusId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.StatusId, (SelectList)ViewBag.StatusId, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
 }
@@ -74,3 +93,19 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('input[type="radio"]').click(function () {
+                if ($(this).attr('id') == 'existing-customer') {
+                    $('.existing-customer-list').show();
+                    $('.new-customer-info').hide();
+                } else {
+                    $('.existing-customer-list').hide();
+                    $('.new-customer-info').show();
+                }
+            });
+        });
+    </script>
+}

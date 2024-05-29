@@ -82,14 +82,35 @@ namespace WhiteCloudHomestayManagementSystem.Areas.Manager.Controllers
         }
 
         // GET: Manager/Reservations/Create
-        public ActionResult Create()
+        public ActionResult Create(string customerSearch, string employeeSearch, string homestaySearch)
         {
-            ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "UserId");
-            ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "UserId");
-            ViewBag.HomestayId = new SelectList(db.Homestays, "HomestayId", "Name");
-            ViewBag.StatusId = new SelectList(db.ReservationStatuses, "Id", "StatusName");
+            var customers = string.IsNullOrEmpty(customerSearch)
+                ? db.Customers.ToList()
+                : db.Customers.Where(c => c.UserId.Contains(customerSearch)).ToList();
+
+            var employees = string.IsNullOrEmpty(employeeSearch)
+                ? db.Employees.ToList()
+                : db.Employees.Where(e => e.UserId.Contains(employeeSearch)).ToList();
+
+            var homestays = string.IsNullOrEmpty(homestaySearch)
+                ? db.Homestays.ToList()
+                : db.Homestays.Where(h => h.Name.Contains(homestaySearch)).ToList();
+
+            var reservationStatuses = db.ReservationStatuses.ToList();
+
+            ViewBag.Customers = new SelectList(customers, "CustomerId", "UserId");
+            ViewBag.Employees = new SelectList(employees, "EmployeeId", "UserId");
+            ViewBag.Homestays = new SelectList(homestays, "HomestayId", "Name");
+            ViewBag.Statuses = new SelectList(reservationStatuses, "Id", "StatusName");
+
+            ViewBag.CustomerSearch = customerSearch;
+            ViewBag.EmployeeSearch = employeeSearch;
+            ViewBag.HomestaySearch = homestaySearch;
+
             return View();
         }
+
+
 
         // POST: Manager/Reservations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 

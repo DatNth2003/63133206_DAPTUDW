@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using WhiteCloudHomestayManagementSystem.Models;
 
 namespace WhiteCloudHomestayManagementSystem.ViewModels
 {
@@ -37,5 +38,9 @@ namespace WhiteCloudHomestayManagementSystem.ViewModels
         [Required(ErrorMessage = "Please enter the price")]
         [Range(0, double.MaxValue, ErrorMessage = "Price must be greater than or equal to 0")]
         public decimal Price { get; set; }
+        public Customer Customer { get; set; }
+        public Customer NewCustomer { get; set; }
+
+
     }
 }

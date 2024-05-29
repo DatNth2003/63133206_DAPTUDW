@@ -1,0 +1,128 @@
+﻿@model PagedList.IPagedList<WhiteCloudHomestayManagementSystem.Models.Homestay>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+    .card-available {
+        border: 2px solid green;
+        color: green;
+    }
+
+    .card-booked {
+        border: 2px solid red;
+        color: red;
+    }
+
+    .card-maintenance {
+        border: 2px solid gray;
+        color: gray;
+    }
+
+    .pagination-buttons {
+        display: flex;
+        justify-content: center;
+    }
+
+        .pagination-buttons a {
+            display: inline-block;
+            margin: 0 2px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            color: #333;
+            text-decoration: none;
+        }
+
+            .pagination-buttons a:hover {
+                background-color: #ddd;
+            }
+</style>
+
+<h2>Homestay List</h2>
+
+@using (Html.BeginForm("Index", "Homestays", FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+        <div class="form-group row">
+            <label for="pageSize" class="col-sm-2 col-form-label">Show per page:</label>
+            <div class="col-sm-2">
+                <select id="pageSize" name="pageSize" class="form-control" onchange="this.form.submit()">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+        </div>
+
+    </p>
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm @(item.HomestayStatus.StatusName == "Available" ? "card-available" : item.HomestayStatus.StatusName == "Booked" ? "card-booked" : "card-maintenance")">
+                <div class="card-body">
+                    <h4 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h4>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                    <p class="card-text">Price: @Html.DisplayFor(modelItem => item.Price)</p>
+                    <p class="card-text">Status: @Html.DisplayFor(modelItem => item.HomestayStatus.StatusName)</p>
+                    <div class="btn-group">
+                        <a href="@Url.Action("Details", new { id = item.HomestayId })" class="btn btn-sm btn-secondary text-white"><i class="bi bi-info-circle"></i> Details</a>
+                        <a href="@Url.Action("Create", "Reservations", new { homestayId = item.HomestayId })" class="btn btn-sm btn-primary text-white">
+                            <i class="bi bi-calendar-plus"></i> Book
+                        </a>
+                        <a href="@Url.Action("NewCheckIn", "Receptionists", new { area = "Receptionist", homestayId = item.HomestayId })" class="btn btn-sm btn-success text-white"><i class="bi bi-plus"></i> Check-in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="clearfix pagination-buttons">
+    @Html.PagedListPager(Model,
+        page => Url.Action("Index", new { page, searchString = ViewBag.CurrentFilter }),
+        new PagedListRenderOptions
+        {
+            DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToIndividualPages = true,
+            MaximumPageNumbersToDisplay = 5,
+            LinkToFirstPageFormat = "First",
+            LinkToLastPageFormat = "Last",
+            LinkToPreviousPageFormat = "<i class='bi bi-arrow-left'></i>",
+            LinkToNextPageFormat = "<i class='bi bi-arrow-right'></i>",
+            PageCountAndCurrentLocationFormat = "Page {0} of {1}",
+            ItemSliceAndTotalFormat = "Displaying items {0} through {1} of {2} total"
+        })
+</div>
+
+<script>
+    $(function () {
+        $('.status-dropdown').change(function () {
+            var selectedStatus = $(this).val();
+            var searchString = $('#searchString').val();
+
+            var newUrl = '@Url.Action("Index")?';
+            if (selectedStatus) {
+                newUrl += 'status=' + selectedStatus;
+            }
+            if (searchString) {
+                newUrl += '&searchString=' + searchString;
+            }
+
+            window.location.href = newUrl;
+        });
+    });
+</script>

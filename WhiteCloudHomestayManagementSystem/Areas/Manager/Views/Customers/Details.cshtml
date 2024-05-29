@@ -1,0 +1,31 @@
+﻿@model WhiteCloudHomestayManagementSystem.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customer Details</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <img src="@Url.Content(Model.IdCardImg)" alt="ID Card Image" class="card-img-top" style="max-width: 200px; max-height: 200px;" />
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(model => model.FullName)</h5>
+                <p class="card-text">
+                    <strong>Email:</strong> @Html.DisplayFor(model => model.Email) <br />
+                    <strong>Phone:</strong> @Html.DisplayFor(model => model.Phone) <br />
+                    <strong>ID Card Number:</strong> @Html.DisplayFor(model => model.IdCardNum) <br />
+                    <strong>Homestay:</strong> @Html.DisplayFor(model => model.Homestay.Name) <br />
+                    <strong>User Email:</strong> @Html.DisplayFor(model => model.User.Email)
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CustomerId }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-default" })
+</p>
