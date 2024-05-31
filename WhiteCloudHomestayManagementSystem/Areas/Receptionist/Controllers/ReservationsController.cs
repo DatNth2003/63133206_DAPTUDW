@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -16,10 +17,24 @@ namespace WhiteCloudHomestayManagementSystem.Areas.Receptionist.Controllers
         private DBWhiteCloudEntities db = new DBWhiteCloudEntities();
 
         // GET: Receptionist/Reservations
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int? page)
         {
-            var reservations = db.Reservations.Include(r => r.Customer).Include(r => r.Employee).Include(r => r.Homestay).Include(r => r.ReservationStatus);
-            return View(reservations.ToList());
+            var reservations = db.Reservations.Include(r => r.Customer)
+                                               .Include(r => r.Homestay)
+                                               .Include(r => r.ReservationStatus)
+                                               .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                reservations = reservations.Where(r => r.Customer.FullName.Contains(searchString)
+                                                    || r.Homestay.Name.Contains(searchString));
+            }
+
+            reservations = reservations.OrderBy(r => r.ReservationId);
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(reservations.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Receptionist/Reservations/Details/5

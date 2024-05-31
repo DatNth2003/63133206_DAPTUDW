@@ -17,21 +17,23 @@ namespace WhiteCloudHomestayManagementSystem.Areas.Manager.Controllers
         private DBWhiteCloudEntities db = new DBWhiteCloudEntities();
 
         // GET: Manager/Customers
-        public ActionResult Index(string searchString, int? page)
+        public ActionResult Index(string searchString, int? page, int? pageSize)
         {
+            int defaultPageSize = 10;
+            int pageNumber = (page ?? 1);
+            int itemsPerPage = pageSize ?? defaultPageSize;
+
             var customers = db.Customers.Include(c => c.User);
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                customers = customers.Where(c => c.FullName.Contains(searchString) || c.IdCardNum.Contains(searchString) || c.Phone.Contains(searchString));
+                customers = customers.Where(c => c.FullName.Contains(searchString) || c.IdCardNum.Contains(searchString) || c.Phone.Contains(searchString) || c.Email.Contains(searchString));
             }
 
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
 
             ViewBag.CurrentFilter = searchString;
 
-            return View(customers.OrderBy(c => c.FullName).ToPagedList(pageNumber, pageSize));
+            return View(customers.OrderBy(c => c.FullName).ToPagedList(pageNumber, itemsPerPage));
         }
 
 

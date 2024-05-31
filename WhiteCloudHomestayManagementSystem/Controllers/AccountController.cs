@@ -79,7 +79,23 @@ namespace WhiteCloudHomestayManagementSystem.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var user = await UserManager.FindByEmailAsync(model.Email);
+
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+                    if (roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "Admin", new { area = "Receptionist" });
+                    }
+                    if (roles.Contains("Receptionist"))
+                    {
+                        return RedirectToAction("Index", "Receptionists", new { area = "Receptionist" });
+                    }
+                    if (roles.Contains("Manager"))
+                    {
+                        return RedirectToAction("Index", "Manager", new { area = "Manager" });
+                    }
                     return RedirectToLocal(returnUrl);
+
                 case SignInStatus.LockedOut:
                     Console.WriteLine("");
                     return View("Lockout");

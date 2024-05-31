@@ -1,45 +1,83 @@
-﻿@model IEnumerable<WhiteCloudHomestayManagementSystem.Models.Reservation>
-
+﻿@model PagedList.IPagedList<WhiteCloudHomestayManagementSystem.Models.Reservation>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Reservations";
     Layout = "~/Areas/Receptionist/Views/Shared/_ReceptionistNavbar.cshtml";
 }
+<link href="~/Content/css/pagination.css" rel="stylesheet">
 
 <h2>Reservations</h2>
 
-<table class="table">
-    <tr>
-        <th>Reservation ID</th>
-        <th>Customer</th>
-        <th>Homestay</th>
-        <th>Check-In Date</th>
-        <th>Check-Out Date</th>
-        <th>Status</th>
-        <th>Actions</th>
-    </tr>
-    @foreach (var reservation in Model)
+<p>
+    @using (Html.BeginForm("Index", "Reservations", FormMethod.Get))
     {
-        <tr>
-            <td>@reservation.ReservationId</td>
-            <td>@reservation.Customer.FullName</td>
-            <td>@reservation.Homestay.Name</td>
-            <td>@reservation.CheckInDate.ToShortDateString()</td>
-            <td>@reservation.CheckOutDate.ToShortDateString()</td>
-            <td>@reservation.ReservationStatus.StatusName</td>
-            <td>
-                @if (reservation.StatusId == 1) // Pending status
-                {
-                    <button class="btn btn-success" onclick="location.href='@Url.Action("CheckIn", "Receptionist", new { reservationID = reservation.ReservationId })'">Check-In</button>
-                }
-                else if (reservation.StatusId == 2) // Checked-in status
-                {
-                    <button class="btn btn-danger" onclick="location.href='@Url.Action("CheckOut", "Receptionist", new { reservationID = reservation.ReservationId })'">Check-Out</button>
-                }
-                else
-                {
-                    <span>Completed</span>
-                }
-            </td>
-        </tr>
+        <div class="input-group mb-3">
+            <input type="text" name="searchString" class="form-control" placeholder="Search by customer or homestay name" value="@ViewBag.CurrentFilter" aria-label="Search" aria-describedby="basic-addon2">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
     }
-</table>
+</p>
+@if (Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>Reservation ID</th>
+            <th>Customer</th>
+            <th>Homestay</th>
+            <th>Check-In Date</th>
+            <th>Check-Out Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.ReservationId</td>
+                <td>@reservation.Customer.FullName</td>
+                <td>@reservation.Homestay.Name</td>
+                <td>@reservation.CheckInDate.ToShortDateString()</td>
+                <td>@reservation.CheckOutDate.ToShortDateString()</td>
+                <td>@reservation.ReservationStatus.StatusName</td>
+                <td>
+                    @if (reservation.StatusId == 1) // Pending status
+                    {
+                        <button class="btn btn-success" onclick="location.href='@Url.Action("CheckIn", "Receptionist", new { reservationID = reservation.ReservationId })'">Check-In</button>
+                    }
+                    else if (reservation.StatusId == 2) // Checked-in status
+                    {
+                        <button class="btn btn-danger" onclick="location.href='@Url.Action("CheckOut", "Receptionist", new { reservationID = reservation.ReservationId })'">Check-Out</button>
+                    }
+                    else
+                    {
+                        <span>Completed</span>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No reservations yet.</p>
+}
+
+
+<div class="clearfix pagination-buttons">
+    @Html.PagedListPager(Model,
+        page => Url.Action("Index", new { page, searchString = ViewBag.CurrentFilter }),
+        new PagedListRenderOptions
+        {
+            DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToIndividualPages = true,
+            MaximumPageNumbersToDisplay = 5,
+            LinkToFirstPageFormat = "First",
+            LinkToLastPageFormat = "Last",
+            LinkToPreviousPageFormat = "<i class='bi bi-arrow-left'></i>",
+            LinkToNextPageFormat = "<i class='bi bi-arrow-right'></i>",
+            PageCountAndCurrentLocationFormat = "Page {0} of {1}",
+            ItemSliceAndTotalFormat = "Displaying items {0} through {1} of {2} total"
+        })
+</div>

@@ -1,0 +1,83 @@
+﻿@model WhiteCloudHomestayManagementSystem.Models.Invoice
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Receptionist/Views/Shared/_ReceptionistNavbar.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Invoice</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IssuedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssuedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckOutDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckOutDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomestayCharge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomestayCharge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceCharge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceCharge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Surcharge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surcharge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reservation.SpecialRequests)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservation.SpecialRequests)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceStatus.StatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceStatus.StatusName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.InvoiceId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
