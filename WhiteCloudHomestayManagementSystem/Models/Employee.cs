@@ -28,6 +28,7 @@ namespace WhiteCloudHomestayManagementSystem.Models
         public string Position { get; set; }
         public string Salary { get; set; }
         public string IdCardImg { get; set; }
+        public string IdCardNum { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

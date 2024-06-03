@@ -117,6 +117,7 @@
     <Property Name="IdCardImg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="User" Relationship="DBWhiteCloudModel.FK__Employees__UserI__571DF1D5" FromRole="Employee" ToRole="User" />
     <NavigationProperty Name="Reservations" Relationship="DBWhiteCloudModel.FK__Reservati__Emplo__6383C8BA" FromRole="Employee" ToRole="Reservation" />
+    <Property Name="IdCardNum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Homestay">
     <Key>
@@ -166,7 +167,7 @@
     <Property Name="HomestayCharge" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
     <Property Name="ServiceCharge" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Surcharge" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="20" Scale="2" />
     <NavigationProperty Name="Reservation" Relationship="DBWhiteCloudModel.FK__Invoices__Reserv__72C60C4A" FromRole="Invoice" ToRole="Reservation" />
     <NavigationProperty Name="InvoiceStatus" Relationship="DBWhiteCloudModel.FK__Invoices__Status__73BA3083" FromRole="Invoice" ToRole="InvoiceStatus" />
   </EntityType>
@@ -220,6 +221,7 @@
     <NavigationProperty Name="Invoices" Relationship="DBWhiteCloudModel.FK__Invoices__Reserv__72C60C4A" FromRole="Reservation" ToRole="Invoice" />
     <NavigationProperty Name="Payments" Relationship="DBWhiteCloudModel.FK__Payment__Reserva__6C190EBB" FromRole="Reservation" ToRole="Payment" />
     <NavigationProperty Name="ReservationStatus" Relationship="DBWhiteCloudModel.FK__Reservati__Statu__6477ECF3" FromRole="Reservation" ToRole="ReservationStatus" />
+    <Property Name="BookingDate" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="ReservationStatus">
     <Key>

@@ -22,7 +22,7 @@ namespace WhiteCloudHomestayManagementSystem.Models
         public decimal HomestayCharge { get; set; }
         public Nullable<decimal> ServiceCharge { get; set; }
         public Nullable<decimal> Surcharge { get; set; }
-        public decimal TotalAmount { get; set; }
+        public Nullable<decimal> TotalAmount { get; set; }
     
         public virtual Reservation Reservation { get; set; }
         public virtual InvoiceStatus InvoiceStatus { get; set; }

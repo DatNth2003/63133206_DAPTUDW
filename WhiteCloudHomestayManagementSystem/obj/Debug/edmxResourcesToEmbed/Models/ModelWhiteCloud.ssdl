@@ -25,6 +25,7 @@
     <Property Name="Position" Type="nvarchar" MaxLength="100" />
     <Property Name="Salary" Type="nvarchar" MaxLength="20" />
     <Property Name="IdCardImg" Type="nvarchar" MaxLength="255" />
+    <Property Name="IdCardNum" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Homestays">
     <Key>
@@ -75,7 +76,7 @@
     <Property Name="HomestayCharge" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="ServiceCharge" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Surcharge" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalAmount" Type="decimal" Precision="20" Scale="2" StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="InvoiceStatuses">
     <Key>
@@ -117,6 +118,7 @@
     <Property Name="NumOfChild" Type="int" />
     <Property Name="SpecialRequests" Type="nvarchar" MaxLength="500" />
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+    <Property Name="BookingDate" Type="date" />
   </EntityType>
   <EntityType Name="ReservationStatuses">
     <Key>
@@ -281,7 +283,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Invoices__Reserv__72C60C4A">
+  <Association Name="FK__Invoices__Reserv__2A164134">
     <End Role="Reservations" Type="Self.Reservations" Multiplicity="0..1" />
     <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
     <ReferentialConstraint>
@@ -293,7 +295,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Invoices__Status__73BA3083">
+  <Association Name="FK__Invoices__Status__2B0A656D">
     <End Role="InvoiceStatuses" Type="Self.InvoiceStatuses" Multiplicity="0..1" />
     <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
     <ReferentialConstraint>
@@ -481,11 +483,11 @@
       <End Role="Homestays" EntitySet="Homestays" />
       <End Role="Images" EntitySet="Images" />
     </AssociationSet>
-    <AssociationSet Name="FK__Invoices__Reserv__72C60C4A" Association="Self.FK__Invoices__Reserv__72C60C4A">
+    <AssociationSet Name="FK__Invoices__Reserv__2A164134" Association="Self.FK__Invoices__Reserv__2A164134">
       <End Role="Reservations" EntitySet="Reservations" />
       <End Role="Invoices" EntitySet="Invoices" />
     </AssociationSet>
-    <AssociationSet Name="FK__Invoices__Status__73BA3083" Association="Self.FK__Invoices__Status__73BA3083">
+    <AssociationSet Name="FK__Invoices__Status__2B0A656D" Association="Self.FK__Invoices__Status__2B0A656D">
       <End Role="InvoiceStatuses" EntitySet="InvoiceStatuses" />
       <End Role="Invoices" EntitySet="Invoices" />
     </AssociationSet>

@@ -18,6 +18,7 @@
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="DBWhiteCloudModel.Employee">
         <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="IdCardNum" ColumnName="IdCardNum" />
           <ScalarProperty Name="IdCardImg" ColumnName="IdCardImg" />
           <ScalarProperty Name="Salary" ColumnName="Salary" />
           <ScalarProperty Name="Position" ColumnName="Position" />
@@ -107,6 +108,7 @@
     <EntitySetMapping Name="Reservations">
       <EntityTypeMapping TypeName="DBWhiteCloudModel.Reservation">
         <MappingFragment StoreEntitySet="Reservations">
+          <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="SpecialRequests" ColumnName="SpecialRequests" />
           <ScalarProperty Name="NumOfChild" ColumnName="NumOfChild" />

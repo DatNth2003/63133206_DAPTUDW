@@ -32,6 +32,7 @@ namespace WhiteCloudHomestayManagementSystem.Models
         public Nullable<int> NumOfChild { get; set; }
         public string SpecialRequests { get; set; }
         public string Notes { get; set; }
+        public Nullable<System.DateTime> BookingDate { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }

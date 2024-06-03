@@ -1,6 +1,4 @@
 ﻿body {
-    height: 100vh;
-    overflow: hidden;
     margin: 0;
 }
 
@@ -60,14 +58,12 @@
     transition: margin-left 0.3s, width 0.3s;
     padding: 20px;
     margin-left: 250px;
-    width: calc(100% - 250px);
     overflow-y: auto;
     margin-top: auto;
     padding-top: 20px;
 }
 
     .main-content.collapsed {
-        margin-left: 80px;
         width: calc(100% - 80px);
     }
 
@@ -105,9 +101,6 @@
     padding: 0;
 }
 
-.container-content {
-    margin-top: 56px;
-}
 
 .collapsed .sidebar-header h4 span {
     visibility: hidden;

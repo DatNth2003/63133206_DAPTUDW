@@ -1,0 +1,111 @@
+﻿@model PagedList.IPagedList<WhiteCloudHomestayManagementSystem.Models.Customer>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Customer Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminNavbar.cshtml";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="~/Content/css/pagination.css" rel="stylesheet">
+
+<h2>Customer Index</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Customers")" class="btn btn-primary">
+        <i class="bi bi-person-plus" style="margin-right: 5px;"></i>
+        Create New
+    </a>
+</p>
+
+<form method="get" action="@Url.Action("Index")" class="form-inline">
+    <div class="form-group mb-2">
+        <label for="searchString" class="sr-only">Search</label>
+        <input type="text" class="form-control" id="searchString" name="searchString" value="@ViewBag.CurrentFilter" placeholder="Search">
+    </div>
+    <button type="submit" class="btn btn-primary mb-2"><i class="bi bi-search" style="margin-right: 5px;"></i>Search</button>
+</form>
+<div class="mb-3 float-end">
+    <select id="pageSizeSelect" class="form-select">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+    </select>
+</div>
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        No customers available.
+    </div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID Card Image</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@Url.Content(item.IdCardImg)" alt="ID Card Image" class="img-thumbnail" style="width: 150px; height: 150px;" />
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CustomerId }, new { @class = "btn btn-warning btn-sm", @title = "Edit" })
+                        @Html.ActionLink("Details", "Details", new { id = item.CustomerId }, new { @class = "btn btn-info btn-sm", @title = "Details" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CustomerId }, new { @class = "btn btn-danger btn-sm", @title = "Delete" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="clearfix pagination-buttons">
+        @Html.PagedListPager(Model,
+            page => Url.Action("Index", new { page, searchString = ViewBag.CurrentFilter }),
+            new PagedListRenderOptions
+            {
+                DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+                DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+                DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+                DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+                DisplayLinkToIndividualPages = true,
+                MaximumPageNumbersToDisplay = 5,
+                LinkToFirstPageFormat = "First",
+                LinkToLastPageFormat = "Last",
+                LinkToPreviousPageFormat = "<i class='bi bi-arrow-left'></i>",
+                LinkToNextPageFormat = "<i class='bi bi-arrow-right'></i>",
+                PageCountAndCurrentLocationFormat = "Page {0} of {1}",
+                ItemSliceAndTotalFormat = "Displaying items {0} through {1} of {2} total"
+            })
+    </div>
+}
+
+<script>
+    document.getElementById('pageSizeSelect').addEventListener('change', function () {
+        var selectedPageSize = this.value;
+        var currentUrl = window.location.href;
+        var newUrl = updateQueryStringParameter(currentUrl, 'pageSize', selectedPageSize);
+        window.location.href = newUrl;
+    });
+
+    function updateQueryStringParameter(uri, key, value) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+            return uri.replace(re, '$1' + key + "=" + value + '$2');
+        }
+        else {
+            return uri + separator + key + "=" + value;
+        }
+    }
+</script>

@@ -30,6 +30,7 @@
           <Property Name="Position" Type="nvarchar" MaxLength="100" />
           <Property Name="Salary" Type="nvarchar" MaxLength="20" />
           <Property Name="IdCardImg" Type="nvarchar" MaxLength="255" />
+          <Property Name="IdCardNum" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Homestays">
           <Key>
@@ -80,7 +81,7 @@
           <Property Name="HomestayCharge" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ServiceCharge" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Surcharge" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalAmount" Type="decimal" Precision="20" Scale="2" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="InvoiceStatuses">
           <Key>
@@ -122,6 +123,7 @@
           <Property Name="NumOfChild" Type="int" />
           <Property Name="SpecialRequests" Type="nvarchar" MaxLength="500" />
           <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+          <Property Name="BookingDate" Type="date" />
         </EntityType>
         <EntityType Name="ReservationStatuses">
           <Key>
@@ -286,7 +288,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Invoices__Reserv__72C60C4A">
+        <Association Name="FK__Invoices__Reserv__2A164134">
           <End Role="Reservations" Type="Self.Reservations" Multiplicity="0..1" />
           <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
           <ReferentialConstraint>
@@ -298,7 +300,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Invoices__Status__73BA3083">
+        <Association Name="FK__Invoices__Status__2B0A656D">
           <End Role="InvoiceStatuses" Type="Self.InvoiceStatuses" Multiplicity="0..1" />
           <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
           <ReferentialConstraint>
@@ -486,11 +488,11 @@
             <End Role="Homestays" EntitySet="Homestays" />
             <End Role="Images" EntitySet="Images" />
           </AssociationSet>
-          <AssociationSet Name="FK__Invoices__Reserv__72C60C4A" Association="Self.FK__Invoices__Reserv__72C60C4A">
+          <AssociationSet Name="FK__Invoices__Reserv__2A164134" Association="Self.FK__Invoices__Reserv__2A164134">
             <End Role="Reservations" EntitySet="Reservations" />
             <End Role="Invoices" EntitySet="Invoices" />
           </AssociationSet>
-          <AssociationSet Name="FK__Invoices__Status__73BA3083" Association="Self.FK__Invoices__Status__73BA3083">
+          <AssociationSet Name="FK__Invoices__Status__2B0A656D" Association="Self.FK__Invoices__Status__2B0A656D">
             <End Role="InvoiceStatuses" EntitySet="InvoiceStatuses" />
             <End Role="Invoices" EntitySet="Invoices" />
           </AssociationSet>
@@ -656,6 +658,7 @@
           <Property Name="IdCardImg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="DBWhiteCloudModel.FK__Employees__UserI__571DF1D5" FromRole="Employee" ToRole="User" />
           <NavigationProperty Name="Reservations" Relationship="DBWhiteCloudModel.FK__Reservati__Emplo__6383C8BA" FromRole="Employee" ToRole="Reservation" />
+          <Property Name="IdCardNum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Homestay">
           <Key>
@@ -705,7 +708,7 @@
           <Property Name="HomestayCharge" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="ServiceCharge" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Surcharge" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="20" Scale="2" />
           <NavigationProperty Name="Reservation" Relationship="DBWhiteCloudModel.FK__Invoices__Reserv__72C60C4A" FromRole="Invoice" ToRole="Reservation" />
           <NavigationProperty Name="InvoiceStatus" Relationship="DBWhiteCloudModel.FK__Invoices__Status__73BA3083" FromRole="Invoice" ToRole="InvoiceStatus" />
         </EntityType>
@@ -759,6 +762,7 @@
           <NavigationProperty Name="Invoices" Relationship="DBWhiteCloudModel.FK__Invoices__Reserv__72C60C4A" FromRole="Reservation" ToRole="Invoice" />
           <NavigationProperty Name="Payments" Relationship="DBWhiteCloudModel.FK__Payment__Reserva__6C190EBB" FromRole="Reservation" ToRole="Payment" />
           <NavigationProperty Name="ReservationStatus" Relationship="DBWhiteCloudModel.FK__Reservati__Statu__6477ECF3" FromRole="Reservation" ToRole="ReservationStatus" />
+          <Property Name="BookingDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="ReservationStatus">
           <Key>
@@ -1056,6 +1060,7 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="DBWhiteCloudModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="IdCardNum" ColumnName="IdCardNum" />
                 <ScalarProperty Name="IdCardImg" ColumnName="IdCardImg" />
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
@@ -1145,6 +1150,7 @@
           <EntitySetMapping Name="Reservations">
             <EntityTypeMapping TypeName="DBWhiteCloudModel.Reservation">
               <MappingFragment StoreEntitySet="Reservations">
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="SpecialRequests" ColumnName="SpecialRequests" />
                 <ScalarProperty Name="NumOfChild" ColumnName="NumOfChild" />

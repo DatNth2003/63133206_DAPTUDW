@@ -1,0 +1,186 @@
+﻿@model WhiteCloudHomestayManagementSystem.Models.Reservation
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminNavbar.cshtml";
+}
+
+<h2>Create</h2>
+
+
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Create", "Reservations", FormMethod.Get, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            <h4>Search Filters</h4>
+            <hr />
+
+            <div class="form-group mb-3">
+                <div class="col-md-9">
+                    <h5>Search Customer</h5>
+                    <div class="input-group">
+                        <input type="text" name="customerSearch" class="form-control" placeholder="Enter keyword" />
+                        <select name="customerId" class="form-control">
+                            <option value="">Select Customer</option>
+                            @if (ViewBag.Customers != null)
+                            {
+                                foreach (var customer in ViewBag.Customers)
+                                {
+                                    <option value="@customer.Value">@customer.Text</option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="" disabled>No customers found</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" value="Search" class="btn btn-default" />
+                    <a href="#" class="btn btn-primary">Add Customer</a>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <div class="col-md-9">
+                    <h5>Search Employee</h5>
+                    <div class="input-group">
+                        <input type="text" name="employeeSearch" class="form-control" placeholder="Enter keyword" />
+                        <select name="employeeId" class="form-control">
+                            <option value="">Select Employee</option>
+                            @if (ViewBag.Employees != null)
+                            {
+                                foreach (var employee in ViewBag.Employees)
+                                {
+                                    <option value="@employee.Value">@employee.Text</option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="" disabled>No employees found</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" value="Search" class="btn btn-default" />
+                    <a href="#" class="btn btn-primary">Add Employee</a>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <div class="col-md-9">
+                    <h5>Search Homestay</h5>
+                    <div class="input-group">
+                        <input type="text" name="homestaySearch" class="form-control" placeholder="Enter keyword" />
+                        <select name="homestayId" class="form-control">
+                            <option value="">Select Homestay</option>
+                            @if (ViewBag.Homestays != null)
+                            {
+                                foreach (var homestay in ViewBag.Homestays)
+                                {
+                                    <option value="@homestay.Value">@homestay.Text</option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="" disabled>No homestays found</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" value="Search" class="btn btn-default" />
+                    <a href="#" class="btn btn-primary">Add Homestay</a>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="col-md-6">
+        @using (Html.BeginForm("Create", "Reservations", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            <h4>Reservation Details</h4>
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BookingDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.BookingDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                    @Html.ValidationMessageFor(model => model.BookingDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CheckInDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.CheckInDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                    @Html.ValidationMessageFor(model => model.CheckInDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CheckOutDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.CheckOutDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                    @Html.ValidationMessageFor(model => model.CheckOutDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StatusId, "Status", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DropDownList("StatusId", ViewBag.Statuses as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NumOfAdults, "Number of Adults", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.NumOfAdults, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NumOfAdults, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NumOfChild, "Number of Children", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.NumOfChild, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NumOfChild, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SpecialRequests, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.SpecialRequests, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SpecialRequests, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-8">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+</div>

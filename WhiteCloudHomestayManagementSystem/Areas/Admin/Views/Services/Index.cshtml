@@ -1,0 +1,76 @@
+﻿@model PagedList.IPagedList<WhiteCloudHomestayManagementSystem.Models.Service>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminNavbar.cshtml";
+}
+<link href="~/Content/css/pagination.css" rel="stylesheet" type="text/css" />
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<h2>Service List</h2>
+
+<div class="row mb-4">
+    <div class="col">
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col text-right">
+        @using (Html.BeginForm("Index", "Services", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div class="input-group">
+                @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Search" })
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-secondary"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Icon</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td><i class="@item.Icon"></i></td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ServiceId }, new { @class = "btn btn-warning btn-sm mr-1" })
+                    @Html.ActionLink("Details", "Details", new { id = item.ServiceId }, new { @class = "btn btn-info btn-sm mr-1" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ServiceId }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="clearfix pagination-buttons">
+    @Html.PagedListPager(Model,
+        page => Url.Action("Index", new { page, searchString = ViewBag.CurrentFilter }),
+        new PagedListRenderOptions
+        {
+            DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToIndividualPages = true,
+            MaximumPageNumbersToDisplay = 5,
+            LinkToFirstPageFormat = "First",
+            LinkToLastPageFormat = "Last",
+            LinkToPreviousPageFormat = "<i class='bi bi-arrow-left'></i>",
+            LinkToNextPageFormat = "<i class='bi bi-arrow-right'></i>",
+            PageCountAndCurrentLocationFormat = "Page {0} of {1}",
+            ItemSliceAndTotalFormat = "Displaying items {0} through {1} of {2} total"
+        })
+</div>
